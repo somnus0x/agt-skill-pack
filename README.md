@@ -2,6 +2,10 @@
 
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
+[![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
+
+> ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
+
 ## Workflow Scout
 
 Workflow Architect that helps you set up AI to match your actual work. Works with Claude, ChatGPT, Gemini, or any AI chat.
@@ -10,8 +14,7 @@ Workflow Architect that helps you set up AI to match your actual work. Works wit
 
 **Claude Code:**
 ```bash
-curl -sL https://raw.githubusercontent.com/somnus0x/agt-skill-pack/main/workflow-scout.md \
-  > .claude/skills/workflow-scout.md
+curl -sL https://raw.githubusercontent.com/somnus0x/agt-skill-pack/main/install.sh | bash
 ```
 Then tell Claude: `ช่วยจัด workflow ให้หน่อย`
 
