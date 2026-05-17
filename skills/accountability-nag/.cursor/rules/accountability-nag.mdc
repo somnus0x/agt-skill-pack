@@ -1,0 +1,16 @@
+---
+description: Personal commitment tracker with escalating confrontation
+globs:
+alwaysApply: false
+---
+
+# Accountability Nag Skill
+
+When the user asks "nag me", "accountability", "commitment check", "did I do it", or "habit tracker":
+
+1. Read `skills/accountability-nag/SKILL.md`
+2. Read the user's commitments file
+3. Calculate days since last_done for each commitment
+4. Check streak and skip patterns
+5. Deliver the nag at the appropriate escalation level (1 = firm, 2 = confrontational, 3 = no mercy)
+6. Present worst offenders first — don't sugarcoat

@@ -1,0 +1,15 @@
+---
+description: Cross-model adversarial review skill
+globs:
+alwaysApply: false
+---
+
+# Factory Review Skill
+
+When the user asks for a review, cross review, adversarial review, stress test, red team, second opinion, fact check, or sanity check:
+
+1. Read `skills/factory-review/SKILL.md`
+2. Identify what's being reviewed (content, spec, code, claims)
+3. Pick the matching review mode and present the appropriate prompt
+4. Help the user send it to a different AI model for review
+5. After review: you are the editor-in-chief — assess which feedback is valid vs noise

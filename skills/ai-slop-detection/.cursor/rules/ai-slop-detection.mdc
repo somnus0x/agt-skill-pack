@@ -1,0 +1,16 @@
+---
+description: Checklist to identify AI-generated UI patterns
+globs:
+alwaysApply: false
+---
+
+# AI Slop Detection Skill
+
+When the user asks "does this look AI", "slop check", "UI review", "design audit", or "AI tells":
+
+1. Read `skills/ai-slop-detection/SKILL.md`
+2. Review the user's UI or design (screenshot, URL, or description)
+3. Run the audit checklist: color, layout, visuals, typography, motion
+4. Score tells detected out of 15
+5. For each tell found, provide the specific fix from the fix pattern table
+6. 0-2 tells = ship it, 3-5 = review needed, 6+ = redesign before shipping

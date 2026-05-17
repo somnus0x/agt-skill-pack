@@ -3,40 +3,126 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
+![Skills](https://img.shields.io/badge/Skills-6-blue)
+![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
 
-## Workflow Scout
+## Quick Start
 
-Workflow Architect that helps you set up AI to match your actual work. Works with Claude, ChatGPT, Gemini, or any AI chat.
-
-### Quick Start
-
-**Claude Code:**
+**Install all skills (Claude Code):**
 ```bash
 curl -sL https://raw.githubusercontent.com/somnus0x/agt-skill-pack/main/install.sh | bash
 ```
-Then tell Claude: `ช่วยจัด workflow ให้หน่อย`
 
-**Claude.ai / ChatGPT / Gemini:**
-Copy the prompt from the "Copy-Paste Version" section in [`workflow-scout.md`](workflow-scout.md) and paste it as your first message.
+**Install one skill:**
+```bash
+curl -sL https://raw.githubusercontent.com/somnus0x/agt-skill-pack/main/install.sh | bash -s factory-review
+```
 
-### What it does
+**Clone and go (Claude Code / Codex / Cursor):**
+```bash
+git clone https://github.com/somnus0x/agt-skill-pack.git
+cd agt-skill-pack
+# Open in your AI tool and start talking
+```
 
-1. Asks 8 structured questions about your work
-2. Outputs a Workflow Map with AI migration opportunities
-3. Gives you a concrete AI setup plan (system prompts, context files, output formats)
-4. Recommends role-specific prompts (max 5) mapped to your actual pain points
-5. Provides search paths so you can keep finding good prompts yourself
+**Any AI chat (Claude.ai / ChatGPT / Gemini):**
+Open the skill file, copy the prompt, paste as your first message.
 
-### Commands
+---
 
-Type these anytime during the interview:
+## Skills
+
+### Factory Review — Cross-Model Adversarial Critique
+> "ผมให้ AI ตัวอื่น review ก่อน deploy ทุกครั้ง"
+
+Use a different AI model to review anything your primary AI produced. Same-model self-review has blind spots — a different model catches what yours missed.
+
+**5 review modes:** Content, Spec/Architecture, Code, Fact-Check, Quick Review
+
+**Try:** `"review this draft"` · `"red team this spec"` · `"sanity check this code"`
+
+📄 [`skills/factory-review/SKILL.md`](skills/factory-review/SKILL.md)
+
+---
+
+### Product Taste — What to Build, What to Cut
+> "ก่อน build feature ถามตัวเอง 5 ข้อนี้ก่อน"
+
+5-filter evaluation for product decisions. Runs features through who-suffers, replaces-what, core-loop, cost-of-being-right, and ship-without-it filters. Kills bad ideas before you waste a sprint.
+
+**Try:** `"should we build this?"` · `"taste check"` · `"what would you cut?"`
+
+📄 [`skills/product-taste/SKILL.md`](skills/product-taste/SKILL.md)
+
+---
+
+### Decision Decay — When Past Decisions Go Stale
+> "คุณเคยกลับไปดูมั้ยว่า decision เดือนก่อนยังถูกอยู่?"
+
+Re-evaluate past decisions when assumptions change. Scores decay as Fresh, Aging, or Stale. Because a choice that was correct in January may be wrong in March.
+
+**Try:** `"is this still the right call?"` · `"decay check"` · `"revisit our DB decision"`
+
+📄 [`skills/decision-decay/SKILL.md`](skills/decision-decay/SKILL.md)
+
+---
+
+### Accountability Nag — The AI That Won't Let You Lie
+> "ให้ AI ไล่ถามว่าทำยัง"
+
+Personal commitment tracker with escalating confrontation. Three levels: firm reminder → confrontational → no mercy. Tracks streaks, skips, and the pattern of avoidance you're pretending doesn't exist.
+
+**Try:** `"nag me about gym"` · `"accountability check"` · `"did I actually do it?"`
+
+📄 [`skills/accountability-nag/SKILL.md`](skills/accountability-nag/SKILL.md)
+
+---
+
+### AI Slop Detection — Does Your UI Look AI-Generated?
+> "UI คุณดู AI-generated อยู่มั้ย"
+
+Checklist to identify AI-generated UI patterns. Scores 15 tells across color, layout, visuals, typography, and motion. If your score is 6+, the UI screams "AI made this."
+
+**Try:** `"does this look AI?"` · `"slop check"` · `"design audit"`
+
+📄 [`skills/ai-slop-detection/SKILL.md`](skills/ai-slop-detection/SKILL.md)
+
+---
+
+### Workflow Scout — AI Workflow Architect
+> "ช่วยจัด workflow ให้หน่อย"
+
+8-question interview → Workflow Map → AI setup plan → role-specific prompts. Builds your AI workflow from scratch based on your actual work.
+
+**Try:** `"help me set up AI for my work"` · `"ช่วยจัด workflow ให้หน่อย"`
+
+📄 [`skills/workflow-scout/SKILL.md`](skills/workflow-scout/SKILL.md)
+
+---
+
+## Multi-Platform Support
+
+Each skill works on all major AI coding tools. Clone once, use anywhere.
+
+| Tool | How it works |
+|------|-------------|
+| **Claude Code** | `curl \| bash` install or clone repo — reads `CLAUDE.md` |
+| **Codex CLI** | Clone repo — reads `AGENTS.md` |
+| **Cursor** | Clone repo — reads `.cursor/rules/` |
+| **Any AI chat** | Copy prompt from `SKILL.md`, paste into chat |
+
+---
+
+## Skill Commands
+
+Available inside any skill session:
 - `SKIP` — jump to next section
 - `EXPAND [topic]` — go deeper
-- `DONE` — summarize with whatever data is available
+- `DONE` — summarize with current data
 - `REDO` — start over
 
 ---
 
-Inspired by [dot-skill](https://github.com/titanwings/colleague-skill) which distills a colleague's workflow. This does the opposite — builds *your own* from scratch.
+*Skills should be free. Inspired by [dot-skill](https://github.com/titanwings/colleague-skill).*

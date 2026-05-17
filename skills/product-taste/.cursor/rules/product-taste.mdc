@@ -1,0 +1,15 @@
+---
+description: 5-filter product taste evaluation skill
+globs:
+alwaysApply: false
+---
+
+# Product Taste Skill
+
+When the user asks "should we build", "is this worth building", "taste check", "what would you cut", "prioritize these", or "product review":
+
+1. Read `skills/product-taste/SKILL.md`
+2. Identify what's being evaluated (feature, idea, product decision)
+3. Run the 5-filter evaluation in order — stop at the first filter that kills it
+4. Deliver verdict: BUILD / DEFER / KILL with reasoning
+5. Default stance is skepticism — the feature has to survive all five filters to earn BUILD
