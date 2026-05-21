@@ -127,6 +127,47 @@ After scouting, the AI delivers a structured report:
 
 ---
 
+## Power-Ups (Optional Integrations)
+
+The base skill works with Claude's built-in web search. For deeper intelligence, wire up these tools:
+
+### Twitter/X CLI
+
+If you have a Twitter CLI tool installed (e.g. `twitter-cli`, `twurl`, or similar), Content Scout can pull real-time engagement data directly — exact like/RT/reply counts, view numbers, and post timestamps. No browser needed.
+
+How to wire it:
+- Install your preferred Twitter CLI
+- Add the CLI path to your shell's PATH
+- Content Scout auto-detects available CLI tools and uses them for X/Twitter searches
+
+This upgrades Round 1-3 from AI-summarized search results to raw platform data with exact metrics.
+
+### Manus (Async Research Agent)
+
+For large-scale scouting across multiple platforms simultaneously, use Manus as a dead drop:
+
+1. Drop a Content Scout task to Manus with your topic and target platforms
+2. Manus browses X, LinkedIn, Reddit, newsletters — whatever you specify
+3. Returns a structured dataset: posts, engagement numbers, content gaps
+4. Feed the Manus output back to Content Scout for the final intelligence report
+
+This turns a 10-minute single-platform scout into a cross-platform content landscape scan. Best for campaign planning and quarterly content strategy.
+
+### Search Operators (X/Twitter)
+
+When using Twitter CLI or browser search, these operators sharpen your results:
+
+- `min_faves:50` — only posts with 50+ likes (skip noise)
+- `-filter:replies` — original posts only, no replies
+- `filter:blue_verified` — verified accounts only
+- `since:2025-05-01` — posts after a specific date
+- `"exact phrase"` — exact match
+- `(term1 OR term2)` — either term
+
+Combine them: `"AI marketing" min_faves:100 -filter:replies filter:blue_verified since:2025-05-15`
+
+---
+
 ## For Marketing Teams
 
 Content Scout fits naturally into a content calendar workflow:
