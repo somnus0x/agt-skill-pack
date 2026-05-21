@@ -1,10 +1,12 @@
 ---
 name: content-scout
+series: Claude Code for Everyday Life
 description: |
-  Pre-publish content intelligence skill. Before drafting any post, scout what's already
-  performing on X/Twitter and across platforms. Uses Twitter CLI for real-time data and
-  Manus for cross-platform deep research. Returns a structured report: what's trending,
-  what's saturated, where the gaps are, and what angle to take.
+  Pre-publish content intelligence skill for marketing teams and content creators.
+  Before drafting any post, scout what's already performing on X/Twitter and across
+  platforms. Uses Twitter CLI for real-time data and Manus for cross-platform deep
+  research. Returns a structured report: what's trending, what's saturated, where
+  the gaps are, and what angle to take.
 triggers:
   - "scout"
   - "research before posting"
