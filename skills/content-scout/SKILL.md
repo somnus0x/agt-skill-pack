@@ -2,9 +2,9 @@
 name: content-scout
 description: |
   Pre-publish content intelligence skill. Before drafting any post, scout what's already
-  performing on social platforms for your topic. Returns a structured report: what's trending,
-  what angles are saturated, where the content gaps are, and what hook patterns work.
-  Prevents posting into noise. Works for marketing teams, content creators, and page admins.
+  performing on X/Twitter and across platforms. Uses Twitter CLI for real-time data and
+  Manus for cross-platform deep research. Returns a structured report: what's trending,
+  what's saturated, where the gaps are, and what angle to take.
 triggers:
   - "scout"
   - "research before posting"
@@ -15,166 +15,162 @@ triggers:
 
 # Content Scout
 
-Research what's already out there before you post. Find what's working, what's saturated, and where the gap is.
-
-**The problem:** Most content gets posted blind. You think your angle is fresh — but 40 people posted the same take yesterday. Content Scout fixes this by scouting the landscape first.
+Don't post blind. Scout what's already out there, find the gap, then draft from a position of knowledge.
 
 ---
 
-## How It Works
+## The Stack
 
-When triggered, the AI runs a structured research workflow:
+Content Scout uses two tools. Set up both.
 
-1. **Define the topic** — what are you about to post about?
-2. **Scout existing content** — search social platforms for recent posts on that topic
-3. **Analyze patterns** — what angles get engagement? what's overdone?
-4. **Find the gap** — what hasn't been said yet? what's underserved?
-5. **Recommend your angle** — a specific, differentiated position to take
+### 1. Twitter CLI — Real-Time X/Twitter Data
+
+Install a Twitter CLI tool (e.g. [`twitter-cli`](https://github.com/missuo/twitter-cli), `twurl`, or similar). This gives you direct access to X/Twitter data — exact engagement numbers, timestamps, view counts — without a browser.
+
+```bash
+# Example: pull a topic's top posts
+twitter search "AI marketing" --sort top --limit 20 --yaml
+```
+
+Why not browser scraping: CLI is faster, scriptable, and doesn't break when X changes their DOM. If your CLI supports search operators, you get surgical precision:
+
+```
+"AI marketing" min_faves:100 -filter:replies filter:blue_verified since:2025-05-15
+```
+
+Key operators:
+- `min_faves:50` — skip noise, only proven posts
+- `-filter:replies -filter:nativeretweets` — original content only
+- `filter:blue_verified` — verified accounts only
+- `since:YYYY-MM-DD` / `until:YYYY-MM-DD` — time window
+- `"exact phrase"` — exact match
+- `(A OR B)` — either term
+
+### 2. Manus — Cross-Platform Deep Research
+
+[Manus](https://manus.im) is an async research agent. Use it as a dead drop for large-scale scouting:
+
+1. Drop a task: "Scout what's performing about [topic] on X, LinkedIn, Reddit, and newsletters in the last 7 days"
+2. Manus browses all platforms, collects posts, extracts engagement data
+3. You get back a structured dataset — posts, numbers, patterns
+4. Feed the Manus output into Content Scout for the final intelligence report
+
+When to use Manus vs Twitter CLI alone:
+- **Twitter CLI** — quick scout, single platform, 5 minutes
+- **Manus** — campaign planning, cross-platform landscape, quarterly strategy
 
 ---
 
-## Usage
+## Workflow
 
-Tell Claude to scout before you post:
+### Step 1: Define Your Topic
 
-```
-Scout "AI tools for marketing" before I draft
-```
+What are you about to post about? Be specific. "AI" is too broad. "AI agents replacing junior devs" is searchable.
 
-```
-What's already trending about "remote work productivity"?
-```
+### Step 2: Run the Scout Rounds
 
-```
-Find content gaps for "personal branding"
-```
+Three rounds. Each answers a different question.
 
----
+**Round 1: What's Performing Right Now**
 
-## Research Rounds
+Pull the top posts on your topic sorted by engagement. Twitter CLI with `--sort top` or Manus with "find highest engagement posts about [topic]."
 
-The skill runs 3 core research rounds per topic:
-
-### Round 1: What's Performing (Top Posts)
-
-Search for the highest-engagement posts on your topic. Focus on:
-- Who posted it
-- What angle they took
+Extract for each post:
+- Author handle and follower range
+- The angle they took
 - The hook (first 1-2 sentences)
-- Engagement numbers (likes, shares, comments)
+- Likes, RTs, replies, views
 
-### Round 2: What's Fresh (Last 24-48h)
+**Round 2: What's Fresh (Last 24-48h)**
 
-Search for recent posts gaining traction right now. Focus on:
+Filter to recent posts gaining traction. Use `since:` operator or tell Manus "last 48 hours only."
+
+Focus on:
 - Emerging angles and debates
-- Which posts are accelerating
-- What the audience is reacting to today
+- Which posts are accelerating (high engagement relative to post age)
+- What the audience is reacting to right now
 
-### Round 3: What the Leaders Are Saying (Key Accounts)
+**Round 3: What the Key Accounts Are Saying**
 
-Search for posts from verified/high-follower accounts. Focus on:
+Filter to verified or high-follower accounts. Use `filter:blue_verified min_faves:100` or tell Manus "only accounts with 10K+ followers."
+
+Focus on:
 - What positions the thought leaders hold
 - Their framing style
-- Where they agree and disagree
+- Where they agree vs disagree with each other
+
+### Step 3: Analyze and Find the Gap
+
+After collecting data from all three rounds, synthesize:
+
+- **What's working** — which angles get the most engagement?
+- **What's saturated** — which angles have 20+ posts saying the same thing?
+- **Where's the gap** — what has audience interest but few posts?
+- **What hooks work** — what first-line patterns drive engagement?
+
+### Step 4: Recommend Your Angle
+
+Based on the gap analysis, recommend a specific angle that:
+- Fills an underserved gap
+- Matches the poster's voice and expertise
+- Takes a position (not a summary)
+- Has a proven hook pattern adapted to the new angle
 
 ---
 
 ## Output: Intelligence Report
 
-After scouting, the AI delivers a structured report:
-
 ```markdown
-# Content Scout: [Your Topic]
+# Content Scout: [Topic]
+
+## Data Collected
+- X/Twitter: [N] posts via Twitter CLI
+- Cross-platform: [N] posts via Manus (if used)
+- Time range: [dates]
 
 ## What's Working
-- [2-3 angles getting the most engagement, with examples]
+- [Angle 1] — @handle got [N] likes with "[hook excerpt]"
+- [Angle 2] — @handle got [N] likes with "[hook excerpt]"
 
 ## What's Saturated
-- [Angles that are overdone — posting here means competing with noise]
+- [Angle] — [N] posts in last 48h, engagement declining
+- [Angle] — every account saying the same thing
 
 ## Content Gaps
-- [Angles with audience interest but few posts — your opportunity]
+- [Gap 1] — audience asking about this in replies, nobody posting about it
+- [Gap 2] — adjacent angle with high engagement, untapped variation
 
-## Hook Patterns
-- [Common first-line patterns that drive clicks/reads]
+## Hook Patterns That Work
+- [Pattern]: "[example first line]" — [N] likes
+- [Pattern]: "[example first line]" — [N] likes
 
 ## Recommended Angle
-- [A specific position for YOUR post that fills a gap]
+[Specific position to take, with suggested hook]
 
 ## Avoid
-- [Angles with declining engagement or heavy competition]
+- [Overdone angle]
+- [Angle with declining engagement]
 ```
-
----
-
-## Why This Works
-
-- **Before-you-post checkpoint** — catches "I thought this was original" moments
-- **Data over gut feel** — see actual engagement numbers, not assumptions
-- **Saves wasted posts** — don't spend an hour drafting something the market already said
-- **Works for any platform** — X/Twitter, LinkedIn, Facebook pages, newsletters
-- **Non-technical** — no coding required, just tell Claude to scout
-
----
-
-## Tips
-
-- **Scout the day you plan to post** — content landscapes shift fast
-- **Adjust for your niche** — a topic with 50 posts needs different analysis than one with 5,000
-- **Use the gaps, not the trends** — the goal isn't to copy what's working, it's to find what's missing
-- **Pair with your brand voice** — the recommended angle should fit how you actually talk, not how the top posts talk
-- **Re-scout after big news** — industry events reset the landscape overnight
-
----
-
-## Power-Ups (Optional Integrations)
-
-The base skill works with Claude's built-in web search. For deeper intelligence, wire up these tools:
-
-### Twitter/X CLI
-
-If you have a Twitter CLI tool installed (e.g. `twitter-cli`, `twurl`, or similar), Content Scout can pull real-time engagement data directly — exact like/RT/reply counts, view numbers, and post timestamps. No browser needed.
-
-How to wire it:
-- Install your preferred Twitter CLI
-- Add the CLI path to your shell's PATH
-- Content Scout auto-detects available CLI tools and uses them for X/Twitter searches
-
-This upgrades Round 1-3 from AI-summarized search results to raw platform data with exact metrics.
-
-### Manus (Async Research Agent)
-
-For large-scale scouting across multiple platforms simultaneously, use Manus as a dead drop:
-
-1. Drop a Content Scout task to Manus with your topic and target platforms
-2. Manus browses X, LinkedIn, Reddit, newsletters — whatever you specify
-3. Returns a structured dataset: posts, engagement numbers, content gaps
-4. Feed the Manus output back to Content Scout for the final intelligence report
-
-This turns a 10-minute single-platform scout into a cross-platform content landscape scan. Best for campaign planning and quarterly content strategy.
-
-### Search Operators (X/Twitter)
-
-When using Twitter CLI or browser search, these operators sharpen your results:
-
-- `min_faves:50` — only posts with 50+ likes (skip noise)
-- `-filter:replies` — original posts only, no replies
-- `filter:blue_verified` — verified accounts only
-- `since:2025-05-01` — posts after a specific date
-- `"exact phrase"` — exact match
-- `(term1 OR term2)` — either term
-
-Combine them: `"AI marketing" min_faves:100 -filter:replies filter:blue_verified since:2025-05-15`
 
 ---
 
 ## For Marketing Teams
 
-Content Scout fits naturally into a content calendar workflow:
+This fits directly into a content calendar:
 
-1. **Monday planning** — scout topics for the week's content
-2. **Pre-draft** — scout the specific angle before writing
-3. **Competitor watch** — scout what competitors are posting about
-4. **Campaign prep** — scout audience sentiment before launching a campaign
+1. **Monday planning** — scout all topics for the week, identify which gaps to fill which day
+2. **Pre-draft checkpoint** — scout the specific angle before anyone writes
+3. **Competitor watch** — scout what competitors posted this week, find what they missed
+4. **Campaign prep** — scout audience sentiment on your campaign topic before launch
 
-The skill turns "what should we post?" from a brainstorm into a data-informed decision.
+The skill turns "what should we post?" from a brainstorm into a decision backed by data.
+
+---
+
+## Tips
+
+- **Scout the day you post** — content landscapes shift fast, yesterday's gap might be today's noise
+- **Adjust thresholds for your niche** — use `min_faves:10` for niche topics, `min_faves:500` for mainstream
+- **Use the gaps, not the trends** — the goal isn't to copy what's working, it's to say what nobody else is saying
+- **Re-scout after big news** — industry events reset the entire landscape overnight
+- **Manus for depth, CLI for speed** — don't over-engineer a quick pre-post check with a full Manus run
