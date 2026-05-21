@@ -29,6 +29,7 @@ else
   install_skill "decision-decay"
   install_skill "accountability-nag"
   install_skill "ai-slop-detection"
+  install_skill "occam"
 fi
 
 echo ""
@@ -41,3 +42,4 @@ echo "  product-taste        → \"should we build this?\" or \"taste check\""
 echo "  decision-decay       → \"is this still the right call?\""
 echo "  accountability-nag   → \"nag me about gym\""
 echo "  ai-slop-detection    → \"does this UI look AI-generated?\""
+echo "  occam                → \"is this necessary?\" or \"simpler\""
