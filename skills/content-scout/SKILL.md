@@ -138,6 +138,71 @@ When Manus drops results, pipe them into the scout workflow:
 
 The loop: **you drop tasks → Manus researches → results auto-sync → Content Scout analyzes → you draft from a position of knowledge.**
 
+#### Step 6: Auto-Schedule (hands-free scouting)
+
+Instead of manually dropping tasks, set up a cron that auto-generates and pushes a scout task on a schedule. Every week, a fresh research brief lands in Manus's queue without you lifting a finger.
+
+```bash
+#!/bin/bash
+# drop-content-scout.sh — auto-drop weekly scout task to Manus
+# Cron: Thursday 20:00 your timezone — results land by Friday/Saturday
+
+REPO="/path/to/manus-tasks"
+TODAY=$(date '+%Y-%m-%d')
+NEXT_MON=$(date -d 'next monday' '+%Y-%m-%d')
+TASK_FILE="$REPO/tasks/${TODAY}_content-scout-w${NEXT_MON}.md"
+
+# Guard: don't duplicate if already dropped this week
+if ls "$REPO/tasks/"*content-scout-w${NEXT_MON}* 2>/dev/null | grep -q .; then
+    exit 0
+fi
+
+cat > "$TASK_FILE" << HEREDOC
+# Task: Weekly Content Scout — Week of $NEXT_MON
+Type: research
+Created: $TODAY
+
+## Brief
+Run a content landscape scout for next week's posts. Research across X/Twitter, LinkedIn, Reddit, and newsletters.
+
+### Track 1: What's Trending (Global)
+Search for viral posts about [YOUR TOPICS] in the past 7 days. Extract exact text, engagement numbers, author handles, URLs. Focus on posts with >500 likes.
+
+### Track 2: What's Trending (Local/Niche)
+Search your community platforms — Facebook groups, forums, local-language discussions. What questions are people asking? What are they struggling with?
+
+### Track 3: Competitor Watch
+Check what your top 3-5 competitor accounts posted this week. What performed? What format? What angle?
+
+### Track 4: Gap Detection
+Cross-reference tracks 1-3. Where is there audience interest but few posts? That's the gap.
+
+## Output
+Save as: results/content-scout_${TODAY}.md
+
+Include:
+- Direct URLs to every source
+- Exact engagement numbers
+- Final "Top 5 Content Opportunities" section with suggested angles
+
+## Context
+[Your page description, audience, what content style works for you]
+HEREDOC
+
+cd "$REPO"
+git add "tasks/${TODAY}_content-scout-w${NEXT_MON}.md"
+git commit -m "task: content scout for week of $NEXT_MON"
+git push origin master
+```
+
+```bash
+# Add to crontab — Thursday evening, research lands by weekend
+# crontab -e
+0 20 * * 4 /path/to/drop-content-scout.sh
+```
+
+The full loop runs on autopilot: **Thursday cron drops task → Manus researches overnight → Friday auto-pull syncs results → you plan next week's content from data, not guesses.**
+
 #### When to use Manus vs Twitter CLI alone
 - **Twitter CLI** — quick scout, single platform, 5 minutes
 - **Manus** — campaign planning, cross-platform landscape, quarterly strategy, anything that needs a real browser
