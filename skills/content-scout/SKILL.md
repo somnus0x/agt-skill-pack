@@ -27,14 +27,66 @@ Content Scout uses two tools. Set up both.
 
 ### 1. Twitter CLI — Real-Time X/Twitter Data
 
-Install a Twitter CLI tool (e.g. [`twitter-cli`](https://github.com/missuo/twitter-cli), `twurl`, or similar). This gives you direct access to X/Twitter data — exact engagement numbers, timestamps, view counts — without a browser.
+You need a CLI tool that talks to X/Twitter directly — no browser, no API key application, just auth cookies and go.
+
+#### Pick one:
+
+| Tool | Install | Auth | Best for |
+|------|---------|------|----------|
+| [twitter-cli](https://github.com/missuo/twitter-cli) | `go install` or download binary | Cookie-based (auth_token + ct0 from browser) | Search, tweet fetch, user timeline. Lightweight. |
+| [twurl](https://github.com/twitter/twurl) | `gem install twurl` | OAuth (needs Twitter dev app) | Official Twitter tool. Heavier setup but stable. |
+| [twikit](https://github.com/d60/twikit) | `pip install twikit` | Cookie-based or login | Python library. Good if you want to script beyond CLI. |
+| [snscrape](https://github.com/JustAnotherArchivist/snscrape) | `pip install snscrape` | No auth needed | Historical search. May lag on real-time data. |
+
+#### Setup guide (twitter-cli — recommended)
 
 ```bash
-# Example: pull a topic's top posts
-twitter search "AI marketing" --sort top --limit 20 --yaml
+# 1. Install
+# macOS/Linux — download from releases or:
+go install github.com/missuo/twitter-cli@latest
+
+# 2. Get auth cookies from your browser
+# Open X/Twitter in Chrome → F12 → Application → Cookies → x.com
+# Copy these two values:
+#   auth_token  (long hex string)
+#   ct0         (long hex string)
+
+# 3. Configure
+export TWITTER_AUTH_TOKEN="your_auth_token_here"
+export TWITTER_CT0="your_ct0_here"
+
+# Or save to a .env file and source it:
+echo 'TWITTER_AUTH_TOKEN=xxx' >> ~/.twitter-cli.env
+echo 'TWITTER_CT0=xxx' >> ~/.twitter-cli.env
+source ~/.twitter-cli.env
+
+# 4. Test it
+twitter search "Claude Code" --sort top --limit 5 --yaml
 ```
 
-Why not browser scraping: CLI is faster, scriptable, and doesn't break when X changes their DOM. If your CLI supports search operators, you get surgical precision:
+#### Setup guide (twikit — Python alternative)
+
+```bash
+# 1. Install
+pip install twikit
+
+# 2. Quick script
+python3 << 'EOF'
+from twikit import Client
+client = Client()
+client.login(auth_info_1='your_username', password='your_password')
+# Or use cookies:
+# client.set_cookies({'auth_token': 'xxx', 'ct0': 'xxx'})
+
+tweets = client.search_tweet('Claude Code', product='Top')
+for t in tweets:
+    print(f"@{t.user.screen_name} | {t.favorite_count} likes | {t.text[:80]}")
+EOF
+```
+
+#### Why CLI over browser scraping
+
+CLI is faster, scriptable, and doesn't break when X changes their DOM. If your CLI supports search operators, you get surgical precision:
 
 ```
 "AI marketing" min_faves:100 -filter:replies filter:blue_verified since:2025-05-15
@@ -48,7 +100,20 @@ Key operators:
 - `"exact phrase"` — exact match
 - `(A OR B)` — either term
 
-### 2. Manus — Cross-Platform Deep Research (Dead Drop Setup)
+### 2. Browser Research Agent — Cross-Platform Deep Research (Dead Drop Setup)
+
+You need an async browser agent for cross-platform research (LinkedIn, Reddit, newsletters — places Twitter CLI can't reach).
+
+#### Pick one:
+
+| Tool | Type | Best for |
+|------|------|----------|
+| [Manus](https://manus.im) | Managed agent (paid) | Full browser research, multi-platform scraping, structured output. Drop a task, come back later. |
+| [Browser Use](https://github.com/browser-use/browser-use) | Open-source Python | Self-hosted browser automation with LLM control. Free but you run it yourself. |
+| [Playwright + Claude](https://github.com/anthropics/claude-code) | DIY | Write a Python script that uses Playwright for browsing + Claude for analysis. Most control, most setup. |
+| Manual | Free | Just browse yourself and paste findings into Claude. Works fine for occasional scouting. |
+
+The dead drop pattern below uses Manus, but the same repo structure works with any agent that can read tasks and commit results to GitHub.
 
 [Manus](https://manus.im) is an async browser agent. You use it as a **dead drop** — drop a task, come back later, results are waiting. Here's how to set up the two-way sync.
 
