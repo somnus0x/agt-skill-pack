@@ -23,70 +23,69 @@ Don't post blind. Scout what's already out there, find the gap, then draft from 
 
 ## The Stack
 
-Content Scout uses two tools. Set up both.
+Content Scout uses two tools: **twitter-cli** for X/Twitter data and **Manus** for cross-platform research. No alternatives, no menu. These work. Set them up.
 
 ### 1. Twitter CLI — Real-Time X/Twitter Data
 
-You need a CLI tool that talks to X/Twitter directly — no browser, no API key application, just auth cookies and go.
+[twitter-cli](https://github.com/missuo/twitter-cli) talks to X/Twitter directly. No API key application, no developer portal, no approval wait. Cookie auth from your browser and you're live in 5 minutes.
 
-#### Pick one:
+#### Install
 
-| Tool | Install | Auth | Best for |
-|------|---------|------|----------|
-| [twitter-cli](https://github.com/missuo/twitter-cli) | `go install` or download binary | Cookie-based (auth_token + ct0 from browser) | Search, tweet fetch, user timeline. Lightweight. |
-| [twurl](https://github.com/twitter/twurl) | `gem install twurl` | OAuth (needs Twitter dev app) | Official Twitter tool. Heavier setup but stable. |
-| [twikit](https://github.com/d60/twikit) | `pip install twikit` | Cookie-based or login | Python library. Good if you want to script beyond CLI. |
-| [snscrape](https://github.com/JustAnotherArchivist/snscrape) | `pip install snscrape` | No auth needed | Historical search. May lag on real-time data. |
+**macOS:**
+```bash
+brew install go
+go install github.com/missuo/twitter-cli@latest
+```
 
-#### Setup guide (twitter-cli — recommended)
+**Linux:**
+```bash
+# Download the latest binary from GitHub releases
+curl -L https://github.com/missuo/twitter-cli/releases/latest/download/twitter-cli_Linux_x86_64.tar.gz | tar xz
+sudo mv twitter /usr/local/bin/
+```
+
+**Windows (WSL):**
+```bash
+# Use the Linux instructions inside WSL
+```
+
+**No Go installed?** Download the pre-built binary from [releases](https://github.com/missuo/twitter-cli/releases) — pick your OS, unzip, move to PATH. Done.
+
+#### Auth Setup
+
+You need two cookies from your X/Twitter session. This takes 60 seconds.
+
+1. Open [x.com](https://x.com) in Chrome and log in
+2. Press `F12` (DevTools) → click **Application** tab → **Cookies** → `https://x.com`
+3. Find and copy these two values:
+   - `auth_token` — long hex string (starts with something like `a1b2c3...`)
+   - `ct0` — another long hex string
+
+4. Set them as environment variables:
 
 ```bash
-# 1. Install
-# macOS/Linux — download from releases or:
-go install github.com/missuo/twitter-cli@latest
+# Add to your shell profile (~/.bashrc, ~/.zshrc) so they persist:
+echo 'export TWITTER_AUTH_TOKEN="paste_your_auth_token_here"' >> ~/.bashrc
+echo 'export TWITTER_CT0="paste_your_ct0_here"' >> ~/.bashrc
+source ~/.bashrc
+```
 
-# 2. Get auth cookies from your browser
-# Open X/Twitter in Chrome → F12 → Application → Cookies → x.com
-# Copy these two values:
-#   auth_token  (long hex string)
-#   ct0         (long hex string)
-
-# 3. Configure
-export TWITTER_AUTH_TOKEN="your_auth_token_here"
-export TWITTER_CT0="your_ct0_here"
-
-# Or save to a .env file and source it:
-echo 'TWITTER_AUTH_TOKEN=xxx' >> ~/.twitter-cli.env
-echo 'TWITTER_CT0=xxx' >> ~/.twitter-cli.env
-source ~/.twitter-cli.env
-
-# 4. Test it
+5. Test it:
+```bash
 twitter search "Claude Code" --sort top --limit 5 --yaml
 ```
 
-#### Setup guide (twikit — Python alternative)
+If you see tweets with engagement numbers — you're live.
 
-```bash
-# 1. Install
-pip install twikit
+#### Troubleshooting
 
-# 2. Quick script
-python3 << 'EOF'
-from twikit import Client
-client = Client()
-client.login(auth_info_1='your_username', password='your_password')
-# Or use cookies:
-# client.set_cookies({'auth_token': 'xxx', 'ct0': 'xxx'})
+- **"command not found"** → the binary isn't in your PATH. Run `echo $PATH` and move the binary to one of those directories, or add `~/go/bin` to PATH: `export PATH=$PATH:~/go/bin`
+- **"unauthorized" or empty results** → your cookies expired. Go back to step 2 and copy fresh ones. Cookies last a few months but X can rotate them.
+- **"rate limited"** → wait 15 minutes. Don't run more than ~50 searches per hour.
 
-tweets = client.search_tweet('Claude Code', product='Top')
-for t in tweets:
-    print(f"@{t.user.screen_name} | {t.favorite_count} likes | {t.text[:80]}")
-EOF
-```
+#### Search Operators
 
-#### Why CLI over browser scraping
-
-CLI is faster, scriptable, and doesn't break when X changes their DOM. If your CLI supports search operators, you get surgical precision:
+Once you're set up, these operators give you surgical precision:
 
 ```
 "AI marketing" min_faves:100 -filter:replies filter:blue_verified since:2025-05-15
@@ -100,22 +99,17 @@ Key operators:
 - `"exact phrase"` — exact match
 - `(A OR B)` — either term
 
-### 2. Browser Research Agent — Cross-Platform Deep Research (Dead Drop Setup)
+### 2. Manus — Cross-Platform Deep Research (Dead Drop Setup)
 
-You need an async browser agent for cross-platform research (LinkedIn, Reddit, newsletters — places Twitter CLI can't reach).
+[Manus](https://manus.im) is an async browser agent. Twitter CLI handles X/Twitter. Manus handles everything else — LinkedIn, Reddit, newsletters, competitor websites, anywhere that needs a real browser.
 
-#### Pick one:
+You use it as a **dead drop**: drop a task in a shared GitHub repo, Manus picks it up, does the research, commits results. You pull results automatically. No babysitting.
 
-| Tool | Type | Best for |
-|------|------|----------|
-| [Manus](https://manus.im) | Managed agent (paid) | Full browser research, multi-platform scraping, structured output. Drop a task, come back later. |
-| [Browser Use](https://github.com/browser-use/browser-use) | Open-source Python | Self-hosted browser automation with LLM control. Free but you run it yourself. |
-| [Playwright + Claude](https://github.com/anthropics/claude-code) | DIY | Write a Python script that uses Playwright for browsing + Claude for analysis. Most control, most setup. |
-| Manual | Free | Just browse yourself and paste findings into Claude. Works fine for occasional scouting. |
+#### Sign Up
 
-The dead drop pattern below uses Manus, but the same repo structure works with any agent that can read tasks and commit results to GitHub.
-
-[Manus](https://manus.im) is an async browser agent. You use it as a **dead drop** — drop a task, come back later, results are waiting. Here's how to set up the two-way sync.
+1. Go to [manus.im](https://manus.im) and create an account
+2. You get a browser-based agent that can execute multi-step research tasks
+3. Connect it to your GitHub account (it needs repo access to read tasks and push results)
 
 #### Step 1: Create a shared GitHub repo
 
@@ -161,7 +155,18 @@ Planning next week's content. Need to find gaps — what's trending but underser
 git add tasks/ && git commit -m "task: ai marketing scout" && git push
 ```
 
-Then open Manus, point it at the repo, and tell it: "Check tasks/ for new briefs. Execute them. Commit results to results/."
+Then open Manus and tell it:
+
+```
+Here's my research task repo: https://github.com/[you]/manus-tasks
+
+Read CONTEXT.md for my briefing and output rules.
+Check tasks/ for new briefs. Execute them.
+Commit results to results/ with message "result: [short description]".
+Move completed tasks to tasks/done/.
+```
+
+Manus will clone the repo, read your brief, browse the platforms, and push results back. You don't need to be online.
 
 #### Step 4: Set up auto-pull (the sync loop)
 
@@ -205,7 +210,24 @@ The loop: **you drop tasks → Manus researches → results auto-sync → Conten
 
 #### Step 6: Auto-Schedule (hands-free scouting)
 
-Instead of manually dropping tasks, set up a cron that auto-generates and pushes a scout task on a schedule. Every week, a fresh research brief lands in Manus's queue without you lifting a finger.
+Two sides to auto-schedule: your cron drops the task, Manus picks it up automatically.
+
+**Manus side — set up recurring execution:**
+
+In Manus, create a scheduled task (or use their API if available):
+
+```
+Schedule: Every Friday 00:00 UTC
+Repo: https://github.com/[you]/manus-tasks
+Instructions: Read CONTEXT.md. Check tasks/ for any unprocessed briefs.
+Execute each one. Commit results to results/. Move done tasks to tasks/done/.
+If no new tasks, check if last week's scout is >7 days old and re-run it
+with fresh data.
+```
+
+If Manus doesn't support native scheduling yet, you can trigger it manually each week — or use the cron below to auto-drop tasks so they're waiting whenever you next open Manus.
+
+**Your side — auto-generate the task brief:**
 
 ```bash
 #!/bin/bash
