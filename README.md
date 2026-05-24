@@ -3,7 +3,7 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
-![Skills](https://img.shields.io/badge/Skills-8-blue)
+![Skills](https://img.shields.io/badge/Skills-7-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
@@ -102,25 +102,14 @@ Checklist to identify AI-generated UI patterns. Scores 15 tells across color, la
 
 ---
 
-### Session Search — Find What You Already Discussed
-> "AI ลืมทุกอย่างที่เคยคุยกัน — เพราะไม่เคยสร้าง search ให้มัน"
+### AI Memory — Give Your AI a Past and a Present
+> "AI ลืมทุกอย่าง? เพราะคุณไม่เคยสร้างทางให้มันจำ"
 
-Local FTS5 full-text search over all your Claude Code sessions. Drop-in prompt builds the tool for you — one command, then search 800+ sessions in milliseconds. No cloud, no API keys, no vector DB.
+Two drop-in prompts that give your AI persistent memory. **Long-term:** FTS5 search over past sessions — find old discussions in milliseconds. **Short-term:** hot cache file so AI knows current project state at session start. No cloud, no API keys.
 
-**Try:** `"search sessions for auth refactor"` · `"find past conversation about X"` · `"session search"`
+**Try:** `"set up AI memory"` · `"search past sessions"` · `"AI doesn't remember anything"`
 
-📄 [`skills/session-search/SKILL.md`](skills/session-search/SKILL.md)
-
----
-
-### Hot Cache — AI Knows Today Before You Tell It
-> "ทำไม AI ถึงไม่รู้เลยว่าเมื่อวาน ship อะไร"
-
-One markdown file that summarizes your current project state. AI reads it at session start — knows what shipped, what's blocked, and when the deadline is. No more pasting context every morning.
-
-**Try:** `"set up hot cache"` · `"AI doesn't know my context"` · `"pre-load session context"`
-
-📄 [`skills/hot-cache/SKILL.md`](skills/hot-cache/SKILL.md)
+📄 [`skills/ai-memory/SKILL.md`](skills/ai-memory/SKILL.md)
 
 ---
 
