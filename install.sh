@@ -32,6 +32,9 @@ else
   install_skill "occam"
   install_skill "content-scout"
   install_skill "ai-memory"
+  install_skill "link-triage"
+  install_skill "steal-digest"
+  install_skill "x-collect"
 fi
 
 echo ""
@@ -47,3 +50,6 @@ echo "  ai-slop-detection    → \"does this UI look AI-generated?\""
 echo "  occam                → \"is this necessary?\" or \"simpler\""
 echo "  content-scout        → \"scout this topic\" or \"what's trending\""
 echo "  ai-memory            → \"set up AI memory\" or \"search past sessions\""
+echo "  link-triage          → \"triage this link\" or \"summarize this URL\""
+echo "  steal-digest         → \"steal digest\" or \"what's trending on GitHub?\""
+echo "  x-collect            → \"scout this topic on X\" or \"content gaps\""

@@ -3,7 +3,7 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
-![Skills](https://img.shields.io/badge/Skills-7-blue)
+![Skills](https://img.shields.io/badge/Skills-10-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
@@ -99,6 +99,39 @@ Checklist to identify AI-generated UI patterns. Scores 15 tells across color, la
 **Try:** `"help me set up AI for my work"` · `"ช่วยจัด workflow ให้หน่อย"`
 
 📄 [`skills/workflow-scout/SKILL.md`](skills/workflow-scout/SKILL.md)
+
+---
+
+### Link Triage — AI Reads So You Don't Have To
+> "save ลิงก์ไว้ 200 อัน อ่านจริง 3 อัน"
+
+Drop any URL into your AI — get a 3-5 line summary, category, and relevance score. Know what's worth reading without reading everything. Works with articles, tweets, YouTube, GitHub repos, PDFs.
+
+**Try:** `"triage this link"` · `"summarize this URL"` · `"what's this about?"`
+
+📄 [`skills/link-triage/SKILL.md`](skills/link-triage/SKILL.md)
+
+---
+
+### Steal Digest — Cherry-Pick Ideas From GitHub Trending
+> "ไม่ได้ก๊อปโค้ด แต่ขโมยไอเดีย"
+
+Daily scan of GitHub trending filtered for your stack. AI picks 3-5 repos with ideas worth stealing — patterns, architectures, and techniques you can adapt for your project. Set it as a cron and it runs every morning.
+
+**Try:** `"steal digest"` · `"what's trending?"` · `"anything worth stealing?"`
+
+📄 [`skills/steal-digest/SKILL.md`](skills/steal-digest/SKILL.md)
+
+---
+
+### X Collect — Scout the Landscape Before You Write
+> "ก่อนเขียน ดูก่อนว่าใครเขียนอะไรไปแล้ว"
+
+Research Twitter/X before creating content. Find what's performing, what angles are saturated, and where the content gaps are. Write something new, not something redundant.
+
+**Try:** `"scout this topic"` · `"content gaps for AI tools"` · `"what are people saying about X?"`
+
+📄 [`skills/x-collect/SKILL.md`](skills/x-collect/SKILL.md)
 
 ---
 
