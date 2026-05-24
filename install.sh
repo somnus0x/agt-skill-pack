@@ -31,6 +31,8 @@ else
   install_skill "ai-slop-detection"
   install_skill "occam"
   install_skill "content-scout"
+  install_skill "session-search"
+  install_skill "hot-cache"
 fi
 
 echo ""
@@ -45,3 +47,5 @@ echo "  accountability-nag   → \"nag me about gym\""
 echo "  ai-slop-detection    → \"does this UI look AI-generated?\""
 echo "  occam                → \"is this necessary?\" or \"simpler\""
 echo "  content-scout        → \"scout this topic\" or \"what's trending\""
+echo "  session-search       → \"search past sessions\" or \"find old conversation\""
+echo "  hot-cache            → \"set up hot cache\" or \"pre-load context\""
