@@ -35,6 +35,7 @@ else
   install_skill "link-triage"
   install_skill "steal-digest"
   install_skill "x-collect"
+  install_skill "axelrod-review"
 fi
 
 echo ""
@@ -53,3 +54,4 @@ echo "  ai-memory            → \"set up AI memory\" or \"search past sessions\
 echo "  link-triage          → \"triage this link\" or \"summarize this URL\""
 echo "  steal-digest         → \"steal digest\" or \"what's trending on GitHub?\""
 echo "  x-collect            → \"scout this topic on X\" or \"content gaps\""
+echo "  axelrod-review       → \"axelrod review\" or \"trust score\""

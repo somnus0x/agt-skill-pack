@@ -3,7 +3,7 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
-![Skills](https://img.shields.io/badge/Skills-10-blue)
+![Skills](https://img.shields.io/badge/Skills-11-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
@@ -143,6 +143,20 @@ Two drop-in prompts that give your AI persistent memory. **Long-term:** FTS5 sea
 **Try:** `"set up AI memory"` · `"search past sessions"` · `"AI doesn't remember anything"`
 
 📄 [`skills/ai-memory/SKILL.md`](skills/ai-memory/SKILL.md)
+
+---
+
+### Axelrod Review — Game Theory for AI Review Loops
+> "ผมเอา game theory มาใส่ใน AI review — แล้วมันเริ่มทำงานต่างออกไป"
+
+Tit-for-tat cooperation tracking for AI reviews. Your reviewer remembers what it flagged last round, adjusts depth based on your track record, and catches recurring issues by name. Based on the strategy that won Robert Axelrod's 1984 programming tournament.
+
+**3 review depths:** Light (high trust) · Standard · Deep Audit (low trust)
+**Auto-correction loop:** 3 iterations, model rotation, self-fixing drafts
+
+**Try:** `"axelrod review"` · `"trust score"` · `"why does it keep flagging the same thing?"`
+
+📄 [`skills/axelrod-review/SKILL.md`](skills/axelrod-review/SKILL.md)
 
 ---
 
