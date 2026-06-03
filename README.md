@@ -3,7 +3,7 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
-![Skills](https://img.shields.io/badge/Skills-11-blue)
+![Skills](https://img.shields.io/badge/Skills-14-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
@@ -143,6 +143,30 @@ Two drop-in prompts that give your AI persistent memory. **Long-term:** FTS5 sea
 **Try:** `"set up AI memory"` · `"search past sessions"` · `"AI doesn't remember anything"`
 
 📄 [`skills/ai-memory/SKILL.md`](skills/ai-memory/SKILL.md)
+
+---
+
+### Agent Boundaries — Run Many AI Agents Without Them Colliding
+> "ผมรัน AI 3 terminal พร้อมกัน แล้วมันแก้ทับกันเองจนพัง"
+
+Run 2-3 agents in parallel and they overwrite each other's files. The fix is how you'd fix a colliding human team: one agent owns one domain, the rules live in a contract file, you stop being the bottleneck. Drop-in prompt to map your repo into bounded domains + the per-agent CLAUDE.md boundary block. Concepts from Domain-Driven Design + Team Topologies, dropped onto agents.
+
+**Try:** `"agents keep colliding"` · `"split my repo into domains"` · `"manage agents like a team"`
+
+📄 [`skills/agent-boundaries/SKILL.md`](skills/agent-boundaries/SKILL.md)
+
+---
+
+### Frontend Setup — Claude Code × React/Next.js
+> "เปิด Claude Code ครั้งแรกกับโปรเจค React — มันเขียน code ถูก แต่ไม่เข้ากับโปรเจค"
+
+One-time setup that detects your React/Next.js stack and generates CLAUDE.md rules matching your actual project. Component conventions, import rules, styling approach, data fetching patterns, TypeScript config — all detected from your existing code, not generic best practices.
+
+**4-step workflow:** Detect → Generate → Guardrail → Verify
+
+**Try:** `"setup frontend"` · `"configure for react"` · `"frontend onboarding"`
+
+📄 [`skills/frontend-setup/SKILL.md`](skills/frontend-setup/SKILL.md)
 
 ---
 
