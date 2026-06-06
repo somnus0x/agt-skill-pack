@@ -3,7 +3,7 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
-![Skills](https://img.shields.io/badge/Skills-14-blue)
+![Skills](https://img.shields.io/badge/Skills-16-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
@@ -88,6 +88,17 @@ Checklist to identify AI-generated UI patterns. Scores 15 tells across color, la
 **Try:** `"does this look AI?"` · `"slop check"` · `"design audit"`
 
 📄 [`skills/ai-slop-detection/SKILL.md`](skills/ai-slop-detection/SKILL.md)
+
+---
+
+### Design Taste — Train Your Design Judgment
+> "เลิกถามว่า UI สวยมั้ย"
+
+The judgment layer above the slop checklist. Start from a defined design identity, not a blank screen — generic is a starting-point problem. Four lenses to enforce it: squint test, remove until it breaks, copy test, emotional register. Plus typography/color/spacing/motion references.
+
+**Try:** `"design review"` · `"taste check"` · `"does this look good?"`
+
+📄 [`skills/design-taste/SKILL.md`](skills/design-taste/SKILL.md)
 
 ---
 

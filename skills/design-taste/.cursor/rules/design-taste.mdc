@@ -1,0 +1,16 @@
+---
+description: Train UI/UX design judgment with the four-lens framework, identity-first
+globs:
+alwaysApply: false
+---
+
+# Design Taste Skill
+
+When the user asks "design review", "taste check", "does this look good", "UI feedback", or wants design direction before building a frontend:
+
+1. Read `skills/design-taste/SKILL.md`
+2. Check identity first — is the design's direction defined, or did it start from a blank screen? Generic is a starting-point problem, not a polish problem.
+3. Run the four lenses: squint test, remove until it breaks, copy test, emotional register
+4. Run the AI slop check as the bottom layer
+5. Return the review: identity → 4 lenses → slop check → biggest issue → what to steal
+6. The order is the point: identity (before gen) → lenses (during gen) → slop check (before ship). Start from the top, not the bottom.
