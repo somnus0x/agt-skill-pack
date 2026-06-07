@@ -40,6 +40,7 @@ else
   install_skill "axelrod-review"
   install_skill "frontend-setup"
   install_skill "market-brief-setup"
+  install_skill "claude-md-setup"
 fi
 
 echo ""
@@ -63,3 +64,4 @@ echo "  x-collect            → \"scout this topic on X\" or \"content gaps\""
 echo "  axelrod-review       → \"axelrod review\" or \"trust score\""
 echo "  frontend-setup       → \"setup frontend\" or \"configure for react\""
 echo "  market-brief-setup   → \"setup data brief\" or \"stop AI guessing numbers\""
+echo "  claude-md-setup      → \"setup claude md\" or \"stop AI guessing/forgetting\""
