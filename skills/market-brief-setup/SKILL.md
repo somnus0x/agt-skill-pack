@@ -26,24 +26,46 @@ Any recurring "summarize live data" job: morning market brief, daily metrics dig
 
 Say: "setup data brief", "morning brief pipeline", "stop AI guessing numbers", "cron data cache for AI".
 
-## Step 1 — Pick your sources, write fetchers
+## Step 1 — The default source stack, write fetchers
 
-Start with 2-3 sources. Don't wire ten on day one — most are noise until you know which you actually read.
+These 6 free sources are the working default for a crypto/macro morning brief. All free, two need no key. Start here, then drop the ones you don't read and add the ones you do — but you start with a stack that works, not a blank file.
+
+1. **Prices** — CoinGecko (no key)
+2. **Fear & Greed** — alternative.me (no key)
+3. **MACD / RSI** — derived from historical candles (CoinGecko market_chart)
+4. **Long/Short ratio** — Binance Futures (open)
+5. **Rates + yield curve** — FRED (free key, 1-min signup)
+6. **Stocks / VIX / gold** — yfinance (free)
 
 Each fetcher does one thing: hit the source, write the response to a file. No parsing, no logic.
 
 ```bash
 mkdir -p data
 
-# free, no key
-curl -s 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true' \
-  > data/prices.json
+# 1. prices — free, no key
+curl -s 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true' \
+  > data/crypto-prices.json
 
-# free, no key
-curl -s 'https://api.alternative.me/fng/' > data/sentiment.json
+# 2. fear & greed — free, no key
+curl -s 'https://api.alternative.me/fng/' > data/fear-greed.json
+
+# 3. candles for MACD/RSI — free, no key (derive indicators from this)
+curl -s 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=90&interval=daily' \
+  > data/candles.json
+
+# 4. long/short ratio — free, no key
+curl -s 'https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=BTCUSDT&period=1d&limit=1' \
+  > data/long-short.json
+
+# 5. rates + yield curve — needs FRED key (see below)
+curl -s "https://api.stlouisfed.org/fred/series/observations?series_id=T10Y2Y&api_key=${FRED_API_KEY}&file_type=json&sort_order=desc&limit=1" \
+  > data/fred.json
+
+# 6. stocks/VIX/gold — yfinance, run via python (see fetch-macro.py)
+python3 fetch-macro.py > data/macro.json
 ```
 
-The rest of your sources follow the identical shape — hit it, write the file. Swap in whatever your domain needs (a metrics API, a status endpoint, a CSV feed).
+This is a default, not a law. The first four need no key and run immediately — wire those, see the brief, then decide if FRED and macro earn their place. Swap in whatever your domain needs (a metrics API, a status endpoint, a CSV feed) the same way: hit it, write the file.
 
 ### Secrets: never hardcode keys
 
@@ -51,7 +73,7 @@ Sources that need a key — read it from the environment, never inline:
 
 ```python
 import os
-API_KEY = os.environ.get("MY_API_KEY", "")   # from .env, not in the code
+FRED_API_KEY = os.environ.get("FRED_API_KEY", "")   # from .env, not in the code
 ```
 
 Put the key in `.env`, add `.env` to `.gitignore`, load it before the fetch runs. A key committed to a repo is a key you have to rotate.
@@ -73,11 +95,17 @@ This is the whole generation step. The AI reads files, summarizes, never fetches
 
 ```
 Read every file in data/ :
-- prices.json    — price + 24h change
-- sentiment.json — sentiment index
-[...list each file and what it holds...]
+- crypto-prices.json — price + 24h change
+- fear-greed.json    — sentiment index (fear/greed)
+- candles.json       — historical candles → derive MACD/RSI
+- long-short.json    — Binance long/short ratio
+- fred.json          — rates (DFF) + yield curve (T10Y2Y)
+- macro.json         — S&P, VIX, gold
 
-Summarize into a short brief with sections relevant to your data.
+Summarize into a short brief with sections:
+📊 MARKET PULSE — how prices moved, risk-on or risk-off
+📈 TECHNICALS   — what MACD/RSI say
+🏛️ MACRO        — rates + yield curve tightening or easing
 
 If a file is missing or empty, write "n/a" for that item.
 Do NOT guess any number. If it's not in the files, it's n/a.
@@ -90,7 +118,7 @@ The last two lines matter most. **"Do not guess"** is the guardrail — when a f
 Test the failure case on purpose: empty one file, run the brief.
 
 ```bash
-echo '{}' > data/prices.json   # simulate a dead feed
+echo '{}' > data/crypto-prices.json   # simulate a dead feed
 # run the brief prompt
 ```
 
