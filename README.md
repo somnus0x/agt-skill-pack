@@ -181,6 +181,20 @@ One-time setup that detects your React/Next.js stack and generates CLAUDE.md rul
 
 ---
 
+### Live-Data Brief Setup — stop making AI guess from half-loaded pages
+> "AI สรุปตัวเลขให้ผิดประจำ — เพราะให้มันไปหา data เองตอน gen"
+
+When AI fetches live data while it's generating, it guesses from half-loaded pages and gives you wrong numbers. The fix: split the two beats — cron caches every source to JSON first, then one prompt reads the files. The AI never touches the network, so it stops guessing.
+
+**The pattern:** cron (fetch) → `data/*.json` → one prompt (read + summarize) → brief
+**Built-in guard:** "do not guess numbers; missing = n/a" — so a dead feed writes `n/a`, not a hallucination
+
+**Try:** `"setup data brief"` · `"morning brief pipeline"` · `"stop AI guessing numbers"`
+
+📄 [`skills/market-brief-setup/SKILL.md`](skills/market-brief-setup/SKILL.md)
+
+---
+
 ### Axelrod Review — Game Theory for AI Review Loops
 > "ผมเอา game theory มาใส่ใน AI review — แล้วมันเริ่มทำงานต่างออกไป"
 
