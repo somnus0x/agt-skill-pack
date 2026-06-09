@@ -2,7 +2,7 @@
 
 AI doesn't misbehave because the model is bad. It guesses when it doesn't know, says "done" before checking, expands scope past what you asked, and forgets everything the next session — because nobody told it not to. The fix isn't a smarter model. It's a CLAUDE.md that sets the rules once and loads them every session.
 
-This skill gives you a working CLAUDE.md in three layers: **guardrails** (rules that stop the four misbehaviors), **memory** (so it stops repeating mistakes), and **your brain** (so it works the way you do, not the way a generic assistant does).
+This skill gives you a working CLAUDE.md in four layers: **guardrails** (rules that stop the four misbehaviors), **memory** (so it stops repeating mistakes), **spec-driven** (so it never loses project state across /clear or /compact), and **your brain** (so it works the way you do, not the way a generic assistant does).
 
 Everything here is battle-tested — pulled from a setup running daily from morning brief to production deploy. Copy the blocks, wire them, done.
 
@@ -16,7 +16,7 @@ Say: "setup claude md", "configure my AI rules", "stop AI guessing", "AI keeps f
 
 Claude Code reads `CLAUDE.md` from your project root automatically at the start of every session. Whatever's in it becomes standing instruction — no need to repeat yourself. Other agents (Cursor, etc.) have their own equivalent file; the rules below are portable, the filename isn't.
 
-The three layers stack: guardrails are the floor (everyone needs them), memory is the loop (mistakes stop repeating), your-brain is the personalization (it works like you).
+The four layers stack: guardrails are the floor (everyone needs them), memory is the loop (mistakes stop repeating), spec-driven is the save point (project state survives any context reset), your-brain is the personalization (it works like you).
 
 ---
 
@@ -100,7 +100,63 @@ Every failure becomes a line the next session reads before starting. The loop ti
 
 ---
 
-## Layer 3 — Your brain (so it works like you)
+## Layer 3 — Spec-driven (so it never loses the plot)
+
+MEMORY.md stops repeated *mistakes*. But there's a second kind of forgetting: every `/clear`, `/compact`, or crash wipes *project state* — and you're back to spending 15-20 minutes explaining "what are we building, how far did we get, what did we agree on." The fix isn't a longer context window. It's a `spec.md` the AI updates itself after every task, so the next session reads one file and continues exactly where the last one stopped.
+
+Context lives in two places: **implicit** (inside the session — the chat history) and **explicit** (a file on disk). Implicit context dies on `/clear` and degrades as token count climbs — like RAM that starts to swap. Explicit context is constant. `spec.md` is your save point: like saving a game before you quit, then reopening and loading the save.
+
+**Step 1 —** Create `spec.md` in your project root with four sections:
+
+```markdown
+# [project] — [one-line goal]
+
+## Architecture
+What components exist, how they connect, what tech each uses.
+The actual current shape of the system, not a wishlist.
+
+## Done
+What's built — and the decisions behind it. Not "added auth" but
+"added auth via X because Y, rejected Z." The *why* is the part the
+next session can't reconstruct.
+
+## Todo / Out of scope
+The backlog updated every task. Include what's deliberately NOT being
+built, so the AI doesn't helpfully add it.
+
+## Current state
+The save point. "What am I doing right now / where am I stuck / what's
+the next concrete step." The most important section.
+```
+
+The four sections map to the four questions a fresh session always asks: *what is this / what's done and why / what's left / where exactly did we stop.* `Current state` is load-bearing — the difference between "read spec.md and continue" and "let me re-read the whole codebase to figure out where we are."
+
+**Step 2 —** For anything that crosses a component boundary, add a contracts block. New sessions do the most damage here — they can't know what field the frontend sends the backend unless it's written down, so they guess, guess wrong, and you debug what a past session already settled.
+
+```markdown
+## Data Contracts
+Interfaces between components — the AI may not change these without flagging.
+
+- API response:        { id: string, status: "ok" | "error", data: T }
+- Frontend → backend:  { userId: string, amount: number, chain: string }
+```
+
+**Step 3 —** Add this rule to the Operating Rules block so the AI maintains the spec itself — you will not remember to say "update spec.md" every time, so make it standing:
+
+```markdown
+### SPEC-DRIVEN — the spec is the source of truth, not the chat
+At session start: read spec.md before doing anything.
+After completing any task:
+1. Update spec.md — current state, decisions made, what's next.
+2. Update data contracts if any interface changed.
+3. Never claim "done" without updating spec.md first.
+```
+
+Both halves are required: write-on-finish and read-on-start. A spec nobody reads is a diary; a spec nobody writes goes stale in a day. Wire both sides and `/clear` becomes free — context no longer lives in the session, it lives in a file. Even with infinite context this wins: writing the spec *forces* the AI to organize its understanding instead of just "remembering" the chat. A long chat degrades as it grows; a short spec stays sharp.
+
+---
+
+## Layer 4 — Your brain (so it works like you)
 
 Guardrails are universal. This layer makes the AI think like *you* — your decision style, your voice, your common tasks. You don't write it by hand. You let an AI that already knows you extract it.
 
@@ -133,10 +189,11 @@ This beats hand-writing prompts. You're not optimizing one prompt at a time — 
 
 ## Assembly — the whole setup in order
 
-1. Create `CLAUDE.md` and `MEMORY.md` in your project root.
+1. Create `CLAUDE.md`, `MEMORY.md`, and `spec.md` in your project root.
 2. Paste the **Layer 1 guardrails** block into CLAUDE.md.
 3. Add `@MEMORY.md` near the top + the **LEARNING CAPTURE** rule.
-4. Run the **Layer 3 extraction prompts**, paste the output (work patterns / voice / skill triggers) into CLAUDE.md.
-5. Next session, Claude Code loads all of it automatically. When it slips, tell it to log to MEMORY.md.
+4. Paste the **Layer 3 spec.md scaffold** (four sections + contracts) and add the **SPEC-DRIVEN** rule to the Operating Rules block.
+5. Run the **Layer 4 extraction prompts**, paste the output (work patterns / voice / skill triggers) into CLAUDE.md.
+6. Next session, Claude Code loads all of it automatically — start with "read spec.md" and it continues where you stopped. When it slips, tell it to log to MEMORY.md.
 
-That's the full setup: rules that stop the misbehavior, memory that stops the repeat, and your own working pattern so it stops feeling like a generic assistant.
+That's the full setup: rules that stop the misbehavior, memory that stops the repeat, a spec that survives every context reset, and your own working pattern so it stops feeling like a generic assistant.
