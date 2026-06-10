@@ -1,3 +1,11 @@
+---
+name: design-taste
+description: |
+  Pattern-recognition design review: judge whether an interface works before any analysis.
+  Use for UI and design reviews, visual hierarchy checks, and 'does this look right'
+  calls.
+---
+
 # Design Taste
 
 Design taste is the ability to look at an interface and know — before any analysis — whether it works. This skill doesn't teach design rules. It trains the pattern recognition that makes rules unnecessary.

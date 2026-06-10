@@ -1,3 +1,10 @@
+---
+name: steal-digest
+description: |
+  Scan GitHub trending daily and report which repos contain ideas worth stealing for your
+  project — patterns, not stars. Use for repo scouting and idea extraction.
+---
+
 # Steal Digest — Cherry-Pick Ideas From GitHub Trending
 
 Stop scrolling GitHub trending aimlessly. Let AI scan it daily and tell you which repos have ideas worth stealing for your project.

@@ -1,3 +1,11 @@
+---
+name: agent-boundaries
+description: |
+  Run multiple AI coding agents in parallel without collisions. Use when setting up
+  parallel-agent workflows: defines file boundaries, a written contract between agents,
+  and conflict rules so agents stop overwriting each other's work.
+---
+
 # Agent Boundaries — Run Many AI Agents Without Them Colliding
 
 Run two or three AI coding agents in parallel and they start stepping on each other. One edits a file, another overwrites it, commits collide. The agents that were supposed to make you 3x faster make you slower — because now you're the traffic cop.

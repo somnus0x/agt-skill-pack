@@ -1,3 +1,11 @@
+---
+name: claude-md-setup
+description: |
+  Set up a CLAUDE.md that stops AI guessing, claiming done without verifying, expanding
+  scope past the ask, and forgetting between sessions. Use when configuring Claude Code
+  rules for a repo or workspace.
+---
+
 # CLAUDE.md Setup — the rules that stop AI guessing, lying, overreaching, and forgetting
 
 AI doesn't misbehave because the model is bad. It guesses when it doesn't know, says "done" before checking, expands scope past what you asked, and forgets everything the next session — because nobody told it not to. The fix isn't a smarter model. It's a CLAUDE.md that sets the rules once and loads them every session.

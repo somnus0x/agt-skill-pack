@@ -1,3 +1,12 @@
+---
+name: axelrod-review
+description: |
+  Game-theory review loop for AI drafts: tit-for-tat trust tracking across review rounds.
+  Review depth adapts to the author's track record of addressing feedback, so clean drafts
+  earn lighter reviews and ignored flags trigger deep audits. Use for recurring content or
+  code review loops.
+---
+
 # Axelrod Review — Game Theory for AI Review Loops
 
 AI reviews are stateless. Same prompt, same depth, every time. Your reviewer doesn't know it flagged the same issue last round. It doesn't know you fixed everything it asked for. It treats every draft like it's meeting you for the first time.

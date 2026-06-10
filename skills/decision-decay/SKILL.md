@@ -1,3 +1,11 @@
+---
+name: decision-decay
+description: |
+  Detect when past decisions have gone stale because their inputs changed. Use to review a
+  decision journal: flags choices whose assumptions the world has moved past, and forces a
+  revisit-or-reaffirm call.
+---
+
 # Decision Decay — When Past Decisions Go Stale
 
 Decisions are perishable. A choice that was correct in January may be wrong in March — not because the reasoning was flawed, but because the inputs changed. This skill detects when the world has moved and a past decision hasn't moved with it.

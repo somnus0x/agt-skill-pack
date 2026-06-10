@@ -1,3 +1,11 @@
+---
+name: factory-review
+description: |
+  Cross-model adversarial critique: use a different AI model to review anything your
+  primary AI produced — posts, specs, code, research, decisions. Same-model self-review
+  falls into local minima; a different model catches different blind spots.
+---
+
 # Factory Review — Cross-Model Adversarial Critique
 
 Use a **different AI model** to review anything your primary AI produced. Same-model self-review falls into local minima. A different model catches different blind spots.

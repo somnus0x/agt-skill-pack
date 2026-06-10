@@ -1,3 +1,11 @@
+---
+name: x-collect
+description: |
+  Scout X/Twitter for what's already been said on a topic before writing: what performed,
+  what's saturated, what angle is missing. Use for pre-writing research and content gap
+  analysis.
+---
+
 # X Collect — Scout the Landscape Before You Write
 
 Before writing about any topic, find out what's already been said. What performed? What angle is missing? Where's the gap you can fill?

@@ -1,3 +1,11 @@
+---
+name: occam
+description: |
+  The simpler-thing test: before a fix ships, prove the smaller version doesn't work. Use
+  when code feels overbuilt, when complexity needs challenging, or when asking 'is this
+  necessary'.
+---
+
 # Occam — The Simpler-Thing Test
 
 You proposed a fix. Before it ships, prove the smaller version doesn't work.

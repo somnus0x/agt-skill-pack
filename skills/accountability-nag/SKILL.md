@@ -1,3 +1,12 @@
+---
+name: accountability-nag
+description: |
+  Personal commitments tracker with escalating confrontation. Use when the user wants
+  accountability on recurring commitments, training, habits, or deadlines they keep
+  deferring. Reviews the track record and escalates tone based on the avoidance pattern,
+  not the excuses.
+---
+
 # Accountability Nag — The AI That Won't Let You Lie to Yourself
 
 Personal commitments tracker with escalating confrontation. This isn't a reminder app — it's a mirror that shows you the pattern of avoidance.

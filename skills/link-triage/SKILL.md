@@ -1,3 +1,11 @@
+---
+name: link-triage
+description: |
+  Turn dropped URLs into summarized, categorized entries in a persistent reading queue
+  with priority scoring. Use whenever links should be captured, summarized, classified,
+  and queued instead of rotting in bookmarks.
+---
+
 # Link Triage — AI Reads So You Don't Have To
 
 You save 30 links a day. You read maybe 2. The rest rot in bookmarks until you forget they exist.

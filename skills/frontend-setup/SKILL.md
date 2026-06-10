@@ -1,3 +1,11 @@
+---
+name: frontend-setup
+description: |
+  Bootstrap Claude Code for React/Next.js repos: project context, conventions, and
+  guardrails so it stops guessing and builds correctly from the first prompt. Use when
+  setting up Claude Code in a frontend codebase.
+---
+
 # Frontend Setup — Claude Code × React/Next.js
 
 You just installed Claude Code. Your frontend repo is React or Next.js. This skill gives Claude Code the context it needs to stop guessing and start building correctly from the first prompt.

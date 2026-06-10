@@ -1,3 +1,11 @@
+---
+name: ai-slop-detection
+description: |
+  Detect whether a UI looks AI-generated. Use during design review to run the fingerprint
+  test: identifies the default-theme, gradient, and layout tells that make interfaces read
+  as AI slop, and how to fix each one.
+---
+
 # AI Slop Detection — Does Your UI Look AI-Generated?
 
 The fingerprint test: if you showed your interface to someone and said "AI made this," would they believe you immediately? If yes, the design has failed.

@@ -1,3 +1,11 @@
+---
+name: ai-memory
+description: |
+  Give your AI long-term and short-term memory: keyword-searchable session history (FTS5
+  index) plus a hot cache of current project state loaded at session start. Use when AI
+  should remember past sessions and know project state without re-explaining.
+---
+
 # AI Memory — Give Your AI a Past and a Present
 
 AI doesn't remember anything between sessions. Every new chat starts blank — no history, no context, no idea what you shipped yesterday.

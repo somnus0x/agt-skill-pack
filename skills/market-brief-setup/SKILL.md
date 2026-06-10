@@ -1,3 +1,11 @@
+---
+name: market-brief-setup
+description: |
+  Set up a reliable daily live-data brief: deterministic fetch scripts feed AI clean
+  numbers instead of letting it browse half-loaded pages while writing. Use for morning
+  market or metrics summaries.
+---
+
 # Live-Data Brief Setup — stop making AI guess from half-loaded pages
 
 You want AI to summarize live data every morning — market prices, metrics, whatever updates daily. The obvious way is to let it browse and fetch while it writes the summary. That way is wrong, and it's why your numbers come out garbled.

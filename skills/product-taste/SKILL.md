@@ -1,3 +1,11 @@
+---
+name: product-taste
+description: |
+  Structured feature evaluation before enthusiasm or inertia makes the decision. Use for
+  'should we build this' calls: what to build, what to cut, and the test that separates
+  the two.
+---
+
 # Product Taste — What to Build, What to Cut
 
 Taste isn't opinion. It's pattern recognition compressed into instinct. This skill builds product taste by forcing structured evaluation before enthusiasm or inertia makes the decision for you.
