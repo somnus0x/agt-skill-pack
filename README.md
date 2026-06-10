@@ -3,21 +3,26 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
-![Skills](https://img.shields.io/badge/Skills-16-blue)
+![Skills](https://img.shields.io/badge/Skills-18-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
 
 ## Quick Start
 
-**Install all skills (Claude Code):**
+**Install all skills (Claude Code / Cursor / Codex / Windsurf + more):**
 ```bash
-curl -sL https://raw.githubusercontent.com/somnus0x/agt-skill-pack/main/install.sh | bash
+npx skills add somnus0x/agt-skill-pack
 ```
 
 **Install one skill:**
 ```bash
 curl -sL https://raw.githubusercontent.com/somnus0x/agt-skill-pack/main/install.sh | bash -s factory-review
+```
+
+**Install all via script (Claude Code only):**
+```bash
+curl -sL https://raw.githubusercontent.com/somnus0x/agt-skill-pack/main/install.sh | bash
 ```
 
 **Clone and go (Claude Code / Codex / Cursor):**
