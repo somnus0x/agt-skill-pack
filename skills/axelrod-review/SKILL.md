@@ -26,8 +26,17 @@ Track a **cooperation score** between you (the author) and the reviewer. The sco
 ### How it works
 
 ```
-cooperation_score = issues_addressed / issues_found (rolling avg, last 5 rounds)
+cooperation_score = issues_addressed / (issues_found − rejected_with_reason)
+                    (rolling avg, last 5 rounds)
 ```
+
+Every flag gets one of three responses, each priced differently:
+
+- **Fix it** → cooperation
+- **Reject it WITH a one-line logged reason** → also cooperation (a wrong flag deserves a documented "no", not silent compliance)
+- **Ignore it silently** → defection. Visible in the ledger immediately.
+
+This is the key incentive: rejecting a bad flag costs one written line. Ignoring it costs trust. The cheap path and the honest path become the same path.
 
 - **Score > 0.8 (high trust):** Light review — hook, accuracy, one standout issue only
 - **Score 0.5–0.8 (standard):** Full review — all checks, all fixes
@@ -78,8 +87,11 @@ Replace this with whatever you review for. Examples:
 
 ```
 Before reviewing, read review-trust.json and calculate:
-- cooperation_score = avg(issues_addressed / issues_found) from last 5 rounds
+- cooperation_score = avg(issues_addressed / (issues_found - rejected_with_reason))
+  from last 5 rounds (rounds without the field: treat rejected as 0)
 - recurring_issues = any issue type appearing in 2+ of last 3 rounds
+- reviewer precision = (flags - flags_rejected_with_reason) / flags per reviewer,
+  rolling last 5 rounds
 
 Then adjust your review based on trust level:
 
@@ -100,7 +112,12 @@ Always append to the review prompt:
   "PREVIOUS ROUND: Reviewer flagged [N] issues: [summary]. [X]/[N] were
   addressed. Watch for: [recurring issues or 'no patterns yet']."
 
-After the review, log the round to review-trust.json.
+If this reviewer's rolling precision < 0.7, also append:
+  "CALIBRATION: [X] of your last [N] flags were rejected with documented
+  reasons. Flag only what you are confident is wrong. Fewer, better flags."
+
+After the review, judge every flag (fix / reject with reason / never silent),
+then log the round to review-trust.json.
 ```
 
 #### 4. The auto-correction loop (optional, advanced)
@@ -119,7 +136,11 @@ for iteration in [1, 2, 3]:
      - Iteration == 3 → EXIT (present remaining to human)
      - Otherwise → continue
 
-  C. FIX all actionable issues
+  C. JUDGE every flag, then fix:
+     - VALID → fix it
+     - INVALID → reject WITH a one-line reason (logged)
+     - Never skip a flag silently — silence is defection and it's visible
+     - Two reviewers disagree → side with the one with higher rolling precision
 
   D. LOG the iteration
 
@@ -154,13 +175,36 @@ for iteration in [1, 2, 3]:
     {"iteration": 2, "score": 9.5, "reviewer": "codex", "issues": 0, "fixes": []}
   ],
   "issues_found": 3,
-  "issues_addressed": 3,
+  "issues_addressed": 2,
+  "rejected_with_reason": 1,
+  "ignored_no_reason": 0,
+  "rejection_reasons": [
+    "gemini: suggested re-adding a qualifier that was cut on purpose — softens the thesis"
+  ],
+  "reviewer_flags": {"gemini": 2, "codex": 1},
+  "reviewer_rejected": {"gemini": 1, "codex": 0},
   "issue_types": ["brag", "hedge", "structure"],
   "recurring": [],
   "cooperation_score": 1.0,
   "notes": "clean after 2 iterations"
 }
 ```
+
+`cooperation_score` here = 2 / (3 − 1) = 1.0. The rejected flag doesn't count against you — because you paid for the rejection with a reason.
+
+### Reviewer calibration (pricing the other side)
+
+Authors aren't the only players who can defect. A reviewer that flags everything ("looks thorough!") is defecting too — bad flags cost the author judgment time and are free for the reviewer. Price them:
+
+```
+precision = (flags − flags_rejected_with_reason) / flags   (rolling, last 5 rounds)
+```
+
+- **precision < 0.7** → calibration warning injected into the reviewer's next prompt
+- **precision < 0.5** → bench it: rotate to another model for a full window
+- **Reviewers conflict** → side with the higher-precision reviewer
+
+Now a junk flag isn't free — every rejected flag follows the reviewer for 5 rounds. Flag-everything stops being the dominant strategy, on both sides of the table.
 
 ## Why Tit-for-Tat
 
