@@ -3,7 +3,7 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
-![Skills](https://img.shields.io/badge/Skills-18-blue)
+![Skills](https://img.shields.io/badge/Skills-19-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
@@ -211,6 +211,19 @@ Tit-for-tat cooperation tracking for AI reviews. Your reviewer remembers what it
 **Try:** `"axelrod review"` · `"trust score"` · `"why does it keep flagging the same thing?"`
 
 📄 [`skills/axelrod-review/SKILL.md`](skills/axelrod-review/SKILL.md)
+
+---
+
+### Hold Up — Clarify Before the AI Acts
+> "เราแค่ถาม ไม่ได้สั่ง แต่มันแก้ไปแล้ว 3 ไฟล์"
+
+The AI reads exploratory messages as commands and builds on a guess. Hold Up is the brake: when it catches discuss-mode cues ("i think", "should we", a question with no imperative verb) right as it's about to edit/commit/deploy, it stops and asks ONE tight question instead of sprinting. Pairs with `grill-me` (the invoked deep-interview) — Hold Up is the automatic front-door reflex that decides whether you even need one.
+
+**The give:** a 2-line CLAUDE.md rule that makes the brake fire automatically.
+
+**Try:** `"/hold-up"` · `"just talk, don't action this"` · `"let's think first"`
+
+📄 [`skills/hold-up/SKILL.md`](skills/hold-up/SKILL.md)
 
 ---
 
