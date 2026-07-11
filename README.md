@@ -118,6 +118,17 @@ The judgment layer above the slop checklist. Start from a defined design identit
 
 ---
 
+### Faceless Factory — AI Makes Raw Material, Code Assembles
+> "gen ทีไร ฟอนต์ไทยพัง หน้าเพี้ยน ทุกครั้งคือหมุนกาชา"
+
+Stop letting AI gen your whole carousel. Split it into two layers: AI generates the raw material (backgrounds, characters, clips), code assembles the deliverable (text, layout, render). Thai text stops breaking because it's rendered with a real font, not generated. Ships with a working JSON-driven render template — including the Thai/Latin run-splitting trick that kills tofu boxes.
+
+**Try:** `"my AI carousel is inconsistent"` · `"Thai fonts keep breaking"` · `"how do I make repeatable content with AI"`
+
+📄 [`skills/faceless-factory/SKILL.md`](skills/faceless-factory/SKILL.md)
+
+---
+
 ### Link Triage — AI Reads So You Don't Have To
 > "save ลิงก์ไว้ 200 อัน อ่านจริง 3 อัน"
 
