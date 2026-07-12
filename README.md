@@ -129,6 +129,17 @@ Stop letting AI gen your whole carousel. Split it into two layers: AI generates 
 
 ---
 
+### Character Lock — Train the Identity Once, Reuse It Forever
+> "คลิป 10 อัน หน้าเหมือนแคสต์ 10 คน"
+
+Keep a recurring AI character's face and voice identical across every clip. The problem isn't ugly faces — it's a *different* beautiful face every render, because each gen starts from zero. Fix: lock the identity once (train a face, lock a voice), then reuse it — never re-generate the face. Uses Higgsfield Soul as the current tool, but the principle outlives any one tool.
+
+**Try:** `"my AI character's face keeps changing"` · `"how do I keep a consistent AI face"` · `"same voice across all clips"`
+
+📄 [`skills/character-lock/SKILL.md`](skills/character-lock/SKILL.md)
+
+---
+
 ### Link Triage — AI Reads So You Don't Have To
 > "save ลิงก์ไว้ 200 อัน อ่านจริง 3 อัน"
 

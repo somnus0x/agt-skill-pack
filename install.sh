@@ -25,6 +25,7 @@ else
   echo "Installing all AGT skills..."
   install_skill "workflow-scout"
   install_skill "faceless-factory"
+  install_skill "character-lock"
   install_skill "factory-review"
   install_skill "product-taste"
   install_skill "decision-decay"
