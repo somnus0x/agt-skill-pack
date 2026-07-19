@@ -39,6 +39,19 @@ Open the skill file, copy the prompt, paste as your first message.
 
 ## Skills
 
+### Creator Content-Ops — Make Your AI Stack Sound Like YOU
+> "AI เขียนไม่เหมือนเราสักที เพราะเราไม่มีระบบคุมมัน"
+
+A kit for content creators, not devs. One voice spine (CONTENT.md) governs every format — posts, TikTok/IG carousels, YouTube Shorts, covers — so output stops smelling like AI and comes out consistent every run. AI gens what needs imagination, code composes what needs consistency (Thai text never breaks because it's rendered, not generated). Ships an interactive SETUP that interviews you and writes your voice file from real samples.
+
+**Includes:** voice-spine + 3 AI-smell filters, JSON→PIL carousel render, neutral cover generator, Codex ImageGen method, Shorts assembly. Portable across Claude Code, Cowork, Cursor, Amp.
+
+**Try:** `"setup AI for content"` · `"brandbook for AI"` · `"my AI writes generic"`
+
+📄 [`skills/creator-content-ops/SKILL.md`](skills/creator-content-ops/SKILL.md)
+
+---
+
 ### Factory Review — Cross-Model Adversarial Critique
 > "ผมให้ AI ตัวอื่น review ก่อน deploy ทุกครั้ง"
 
