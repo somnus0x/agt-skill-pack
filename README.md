@@ -3,7 +3,7 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
-![Skills](https://img.shields.io/badge/Skills-23-blue)
+![Skills](https://img.shields.io/badge/Skills-24-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
@@ -205,6 +205,19 @@ Run 2-3 agents in parallel and they overwrite each other's files. The fix is how
 **Try:** `"agents keep colliding"` · `"split my repo into domains"` · `"manage agents like a team"`
 
 📄 [`skills/agent-boundaries/SKILL.md`](skills/agent-boundaries/SKILL.md)
+
+---
+
+### CT — Commit and Tag in One Command
+> "commit ไป 20 ตัวแล้ว ถามว่า staging ตอนนี้ version อะไร ไม่มีใครตอบได้"
+
+Tagging is the step everyone agrees matters and nobody wants to do at 11pm, so version numbers turn into decoration. `/ct` commits, reads the SemVer bump off your own commit messages (`feat:` = minor, `BREAKING CHANGE:` = major, 0.x downgrades major to minor), cuts an annotated tag with real release notes, and prints the push command. It does not ask you patch-or-minor, because the answer that ends the conversation is always "patch".
+
+**It never pushes.** A local tag is cheap to delete; a pushed tag is something people build against. That line keeps a human on it.
+
+**Try:** `/ct` · `/ct minor` · `/ct rc` · `"commit and tag"`
+
+📄 [`skills/ct/SKILL.md`](skills/ct/SKILL.md)
 
 ---
 
