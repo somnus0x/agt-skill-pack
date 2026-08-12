@@ -17,13 +17,43 @@ assume. Run:
 ```bash
 python3 -c "import PIL; print('Pillow', PIL.__version__)" 2>&1
 which ffmpeg 2>&1
-ls /usr/share/fonts/truetype/noto/NotoSansThai-Bold.ttf 2>&1   # or your language's font
-/usr/bin/codex --version 2>&1                                   # only if using ImageGen
+codex --version 2>&1                                            # only if using ImageGen
 ```
 
-Report the gaps in plain language: "You have Pillow and fonts. ffmpeg is missing, so the
-Shorts module won't run until you install it. Codex CLI isn't set up, so cover-gen will
-use the code template only." Do NOT proceed to write files the user can't run.
+**Fonts — find them, don't assume the path.** The render scripts auto-resolve a Thai
+and a Latin font across Linux / macOS / Windows, and *fail loud* with a clear message if
+none is found (they never silently render tofu boxes). Your job here is to confirm at
+least one real Thai font exists on THIS machine and, if the OS isn't Linux, find its
+actual path so you can hand it to the script.
+
+If you (the agent) are running inside the user's environment, resolve it yourself:
+
+```bash
+# Linux
+fc-list :lang=th 2>/dev/null | head
+# macOS
+ls "/System/Library/Fonts/Supplemental/" 2>/dev/null | grep -iE 'thonburi|noto.*thai|leelawadee'
+system_profiler SPFontsDataType 2>/dev/null | grep -iA1 thai | head
+# Windows (PowerShell)
+# Get-ChildItem C:\Windows\Fonts | Where-Object { $_.Name -match 'leelaw|noto.*thai|tahoma' }
+```
+
+Take the real `.ttf` / `.ttc` path you find and pass it via env var (the scripts read
+`THAI_FONT` / `LATIN_FONT` and prefer them over the built-in guesses):
+
+```bash
+export THAI_FONT="/absolute/path/to/your/thai-font.ttf"
+export LATIN_FONT="/absolute/path/to/your/latin-font.ttf"   # optional; a Latin default usually exists
+```
+
+If NO Thai font exists, tell the user to install one (free): macOS
+`brew install --cask font-noto-sans-thai`, Windows Leelawadee is built in, Linux
+`apt install fonts-noto`. Do not proceed to render until a real Thai font resolves.
+
+Report the gaps in plain language: "You have Pillow and a Thai font (Thonburi on your
+Mac, wired via THAI_FONT). ffmpeg is missing, so the Shorts module won't run until you
+install it. Codex CLI isn't set up, so cover-gen will use the code template only." Do NOT
+proceed to write files the user can't run.
 
 ---
 
@@ -115,9 +145,11 @@ wrong?" Iterate until they say yes. A voice file they don't trust is a diary nob
 ## Step 6 — wire the modules
 
 Point each module at the user's real setup:
-- **carousel** / **cover** → edit the `THAI_B` / `LAT_B` font paths in the `.py` files to
-  fonts that ship on their machine (Step 0 told you which exist). Rename the `brand_bar`
-  lockup to their brand.
+- **carousel** / **cover** → do NOT hand-edit font paths in the `.py` files. The scripts
+  auto-resolve fonts and honor the `THAI_FONT` / `LATIN_FONT` env vars from Step 0 — set
+  those instead (survives updates, doesn't fork the source). Only rename the `brand_bar`
+  lockup to their brand. If a render raises a "No thai font found" error, the fix is the
+  env var, not a code edit.
 - **codex_imagegen** → confirm Codex CLI auth from Step 0; the prompt templates are
   neutral, they fill the text.
 - **shorts** → confirm ffmpeg; point at their raw-material folder.

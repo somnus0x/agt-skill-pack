@@ -1,0 +1,383 @@
+# SkillSpector baseline — findings listed here are suppressed on future scans.
+# Edit 'reason' fields and add glob 'rules' as needed. See docs/SUPPRESSION.md.
+version: 1
+rules: []
+fingerprints:
+- hash: sha256:19654ec25ef86a39
+  rule_id: AS3
+  file: accountability-nag/.cursor/rules/accountability-nag.mdc
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:4931c5d5466d7760
+  rule_id: AS3
+  file: accountability-nag/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:1ed0920b2dc195c2
+  rule_id: AS3
+  file: accountability-nag/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:9f2f63f7c96d078f
+  rule_id: AS3
+  file: accountability-nag/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:f33e290861dae214
+  rule_id: AS3
+  file: agent-boundaries/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:bf0ae590fa0c2f84
+  rule_id: AS3
+  file: agent-boundaries/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:a6744082550943e1
+  rule_id: AS3
+  file: agent-boundaries/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:1f93332255ae3328
+  rule_id: AS3
+  file: ai-memory/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:fc72a1b773e9da54
+  rule_id: AS3
+  file: ai-memory/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:8710f3df46b3b0f7
+  rule_id: AS3
+  file: ai-memory/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:12771cf0baf6c35a
+  rule_id: AS3
+  file: ai-slop-detection/.cursor/rules/ai-slop-detection.mdc
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:c8bc685907db544d
+  rule_id: AS3
+  file: ai-slop-detection/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:e45cd0ac73f2acea
+  rule_id: AS3
+  file: ai-slop-detection/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:7af4336616851a9d
+  rule_id: AS3
+  file: ai-slop-detection/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:81d0b68c0064a1ba
+  rule_id: AS3
+  file: axelrod-review/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:5d6a8188ca991494
+  rule_id: AS3
+  file: axelrod-review/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:d003aacc78b4d439
+  rule_id: AS3
+  file: axelrod-review/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:0ba47961840af1f0
+  rule_id: AS3
+  file: content-scout/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:e195fd5206421183
+  rule_id: AS3
+  file: decision-decay/.cursor/rules/decision-decay.mdc
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:2b119b900a1e875e
+  rule_id: AS3
+  file: decision-decay/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:7e187ab91ba601f2
+  rule_id: AS3
+  file: decision-decay/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:267510d7ebb75f89
+  rule_id: AS3
+  file: decision-decay/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:8ba2bccecb054201
+  rule_id: AS3
+  file: design-taste/.cursor/rules/design-taste.mdc
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:c0d021055bdb45f9
+  rule_id: AS3
+  file: design-taste/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:17b467cf68f4f0a9
+  rule_id: AS3
+  file: design-taste/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:679d9e85a78abbc2
+  rule_id: AS3
+  file: design-taste/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:43774263f60d757a
+  rule_id: AS3
+  file: factory-review/.cursor/rules/factory-review.mdc
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:6e10207baed16418
+  rule_id: AS3
+  file: factory-review/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:098d232d32303cf2
+  rule_id: AS3
+  file: factory-review/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:4d972863abfffe10
+  rule_id: AS3
+  file: factory-review/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:b698594706f5f698
+  rule_id: AS3
+  file: frontend-setup/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:a45c0dd1e811282f
+  rule_id: AS3
+  file: frontend-setup/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:7bcc1ae9f9c73cd4
+  rule_id: AS3
+  file: frontend-setup/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:bbdd4d61b4b4a05a
+  rule_id: AS3
+  file: link-triage/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:63dc34ca6289ef45
+  rule_id: AS3
+  file: link-triage/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:a747a69821765466
+  rule_id: AS3
+  file: link-triage/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:213ecf46807093f4
+  rule_id: AS3
+  file: market-brief-setup/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:e966b222930ba063
+  rule_id: AS3
+  file: market-brief-setup/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:c370b297c5781968
+  rule_id: AS3
+  file: market-brief-setup/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:d4c136f42bbf99f5
+  rule_id: AS3
+  file: occam/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:c18c539ab6e78c7e
+  rule_id: AS3
+  file: occam/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:73d40ecbc4dc0b2b
+  rule_id: AS3
+  file: occam/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:28e52518fb5c0a90
+  rule_id: AS3
+  file: product-taste/.cursor/rules/product-taste.mdc
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:403b3b0fd622f75c
+  rule_id: AS3
+  file: product-taste/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:8127cc1c19f4d247
+  rule_id: AS3
+  file: product-taste/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:30245d1b0f8d898a
+  rule_id: AS3
+  file: product-taste/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:fdd029ddc9e1a547
+  rule_id: AS3
+  file: steal-digest/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:eaac86d587bb8c69
+  rule_id: AS3
+  file: steal-digest/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:48acd1ea157d52d7
+  rule_id: AS3
+  file: steal-digest/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:e52ad9c010e6523b
+  rule_id: AS3
+  file: x-collect/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:a856824b890891d4
+  rule_id: AS3
+  file: x-collect/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:318aa4b254940045
+  rule_id: AS3
+  file: x-collect/CLAUDE.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:aca28fc2e1b74690
+  rule_id: E1
+  file: market-brief-setup/SKILL.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:79d64199f868b745
+  rule_id: E1
+  file: market-brief-setup/SKILL.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:42b8f31db98a452d
+  rule_id: E1
+  file: market-brief-setup/SKILL.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:1c077eb855e77afc
+  rule_id: E1
+  file: market-brief-setup/SKILL.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:62c63a433ff05f70
+  rule_id: EA2
+  file: agent-boundaries/SKILL.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:c16c23c82dabac83
+  rule_id: EA1
+  file: content-scout/SKILL.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:f3ba95357399c6a9
+  rule_id: EA2
+  file: content-scout/SKILL.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:15aecaeea3622b66
+  rule_id: MP3
+  file: agent-boundaries/AGENTS.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:e1dabe6ff23edacc
+  rule_id: MP3
+  file: agent-boundaries/SKILL.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:f553eb625997cebe
+  rule_id: P6
+  file: content-scout/SKILL.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'
+- hash: sha256:b1d898852190f3a4
+  rule_id: YR1
+  file: content-scout/SKILL.md
+  reason: 'Reviewed 2026-07-14: findings confirmed false-positive or benign-by-design
+    (crontab in tutorials, skill-instruction text flagged as prompt-injection, env-var
+    API auth). No malware, no exfil.'

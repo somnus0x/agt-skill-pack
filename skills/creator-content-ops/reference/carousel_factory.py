@@ -52,17 +52,55 @@ SUB = (188, 193, 202)
 DIM = (126, 133, 144)
 COLORS = {"bg": BG, "bg_hi": BG_HI, "green": GREEN, "white": WHITE, "sub": SUB, "dim": DIM}
 
-# --- fonts: point these at fonts that ship on your machine -------------------
-# Noto Sans Thai + Noto Sans (Latin) are a safe, free default on most Linux.
-THAI_B = "/usr/share/fonts/truetype/noto/NotoSansThai-Bold.ttf"
-LAT_B = "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf"
+# --- fonts: resolved per-OS so this works on Mac/Windows/Linux, not just Linux.
+# Set THUFIR_THAI_FONT / THUFIR_LATIN_FONT env vars to override with your own.
+import os
+
+_THAI_CANDIDATES = [
+    os.environ.get("THAI_FONT"),
+    # Linux (Noto)
+    "/usr/share/fonts/truetype/noto/NotoSansThai-Bold.ttf",
+    "/usr/share/fonts/opentype/noto/NotoSansThai-Bold.ttf",
+    # macOS
+    "/System/Library/Fonts/Supplemental/Thonburi.ttc",
+    "/Library/Fonts/NotoSansThai-Bold.ttf",
+    "/System/Library/Fonts/Thonburi.ttc",
+    # Windows
+    "C:/Windows/Fonts/Leelawad.ttf",
+    "C:/Windows/Fonts/leelawui.ttf",
+    "C:/Windows/Fonts/tahoma.ttf",
+]
+_LATIN_CANDIDATES = [
+    os.environ.get("LATIN_FONT"),
+    "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+    "/System/Library/Fonts/HelveticaNeue.ttc",
+    "C:/Windows/Fonts/arialbd.ttf",
+    "C:/Windows/Fonts/arial.ttf",
+]
+
+
+def _resolve(candidates: list, label: str) -> str:
+    for p in candidates:
+        if p and Path(p).exists():
+            return p
+    raise FileNotFoundError(
+        f"No {label} font found. Tried: {[c for c in candidates if c]}. "
+        f"Install one, or set the {label.upper()}_FONT env var to a .ttf/.ttc path. "
+        f"Recommended free option: Noto Sans Thai + Noto Sans."
+    )
+
+
+# Resolve once at import — fail LOUD here rather than render silent tofu later.
+THAI_B = _resolve(_THAI_CANDIDATES, "thai")
+LAT_B = _resolve(_LATIN_CANDIDATES, "latin")
 
 
 def F(path: str, sz: int) -> ImageFont.FreeTypeFont:
-    try:
-        return ImageFont.truetype(path, sz)
-    except Exception:
-        return ImageFont.load_default()
+    # Paths are pre-resolved above, so a failure here is a real problem —
+    # never mask it with load_default() (a bitmap font with no Thai glyphs).
+    return ImageFont.truetype(path, sz)
 
 
 def _use_latin(ch: str) -> bool:
@@ -99,16 +137,57 @@ def dtext(d, xy, text, font, fill, latin_font=None):
         d.text((x, y), run, font=f, fill=fill)
 
 
+def _is_thai_combining(ch: str) -> bool:
+    # Thai above/below vowels + tone marks (U+0E31, U+0E34..U+0E3A, U+0E47..U+0E4E).
+    # These MUST stay glued to their preceding base consonant — a break before
+    # one of them orphans the mark and corrupts the syllable.
+    o = ord(ch)
+    return o == 0x0E31 or 0x0E34 <= o <= 0x0E3A or 0x0E47 <= o <= 0x0E4E
+
+
+def _cluster_wrap(draw, token, font, maxw):
+    """Break an unspaced token (e.g. Thai) at safe character boundaries.
+
+    Thai has no inter-word spaces, so a long Thai string is a single `split(" ")`
+    token that would overflow the card. Walk it char-by-char, keeping combining
+    vowels/tones attached to their base, and break only before base characters.
+    """
+    lines, cur = [], ""
+    for ch in token:
+        # Never break right before a combining mark — keep it with its base.
+        if _is_thai_combining(ch):
+            cur += ch
+            continue
+        if cur and draw.textlength(cur + ch, font=font) > maxw:
+            lines.append(cur)
+            cur = ch
+        else:
+            cur += ch
+    if cur:
+        lines.append(cur)
+    return lines
+
+
 def wrap(draw, text, font, maxw):
+    """Width-aware wrap. Wraps on spaces where present (Latin), and falls back
+    to Thai-safe character-cluster breaking for any single token that overflows
+    (unspaced Thai). Fixes the silent right-edge clip on long Thai lines."""
     words = text.split(" ")
     lines, cur = [], ""
     for w in words:
         test = (cur + " " + w).strip()
         if draw.textlength(test, font=font) <= maxw:
             cur = test
+            continue
+        if cur:
+            lines.append(cur)
+            cur = ""
+        # `w` alone still overflows -> break it at cluster boundaries.
+        if draw.textlength(w, font=font) > maxw:
+            parts = _cluster_wrap(draw, w, font, maxw)
+            lines.extend(parts[:-1])
+            cur = parts[-1] if parts else ""
         else:
-            if cur:
-                lines.append(cur)
             cur = w
     if cur:
         lines.append(cur)
