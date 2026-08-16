@@ -3,7 +3,7 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
-![Skills](https://img.shields.io/badge/Skills-24-blue)
+![Skills](https://img.shields.io/badge/Skills-23-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
@@ -218,21 +218,6 @@ Tagging is the step everyone agrees matters and nobody wants to do at 11pm, so v
 **Try:** `/ct` · `/ct minor` · `/ct rc` · `"commit and tag"`
 
 📄 [`skills/ct/SKILL.md`](skills/ct/SKILL.md)
-
----
-
-### Worktree Sessions — One Checkout Per Agent
-> "boundary เขียนครบแล้ว agent ก็ยังพังใส่กัน เพราะมันยืนอยู่บนพื้นเดียวกัน"
-
-Two agents in one checkout share a working tree, an index, and a HEAD. One runs `git checkout -b` and the other changes branch mid-edit; one runs `git add .` and stages the other's half-finished work. No CLAUDE.md rule fixes it, because no rule is being broken. `git worktree` gives every session its own directory and branch off one `.git`, so git enforces the boundary instead of your memory.
-
-**The give:** the setup commands, a per-worktree "Session isolation" CLAUDE.md block, where to put handoff files (not in git), and the gotchas — `.env` doesn't come along, `node_modules` is per-worktree, `rm -rf` isn't `worktree remove`.
-
-**Pairs with `agent-boundaries`:** boundaries say who does what, worktrees say where they stand. You need both.
-
-**Try:** `"git worktree"` · `"parallel sessions"` · `"my agents fight over the same branch"`
-
-📄 [`skills/worktree-sessions/SKILL.md`](skills/worktree-sessions/SKILL.md)
 
 ---
 

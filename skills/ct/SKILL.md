@@ -3,17 +3,25 @@ name: ct
 description: "Commit and tag in one step, with the SemVer bump read off your own commit messages. Use when the user says 'ct', '/ct', 'commit and tag', 'commit tag', or wants to cut a release. Supports /ct (auto-detect), /ct patch|minor|major (force bump), /ct alpha|beta|rc (pre-release). Never pushes: it prints the push command."
 ---
 
-# CT — Commit and Tag Without Thinking About It
+# CT — Save Points For Code You Already Shipped
 
-Twenty commits in, someone asks what version is on staging. Nobody knows. The last tag was cut by hand three weeks ago, the one before it was `v1.2` with no patch number, and one of them got moved after the fact so the release notes now describe code that isn't there.
+Production breaks at 4pm. The first question is not "what version is this", it's **"what's the last point I can get back to."** If you can't answer that, you're reading `git log` backwards with shaking hands, which is the worst possible time to be reading `git log`.
 
-Tagging is the step everyone agrees is important and nobody wants to do at 11pm. So it gets skipped, and version numbers turn into decoration.
+If you ship many times a day, a tag is not a release ceremony. It's a save point. Same idea as saving before you close the game: cheap to make, and the only thing that matters is that one exists near where you are.
 
-`/ct` is one command: commit, work out the right bump from the commits themselves, cut an annotated tag with real release notes, print the push command, stop.
+`/ct` is one command: commit, name the save point by reading your own commits, cut an annotated tag carrying what's inside it, print the push command, stop.
+
+The version number is just the naming scheme. It sorts, and it hints at what changed between two points. Nobody is auditing whether your MINOR was truly a MINOR.
+
+## Why nobody makes save points
+
+Skipping it never produces an error. Everything still works. The entire cost arrives at once, three weeks later, on the worst day. So it's the first thing dropped when you're moving fast, which is exactly when you're generating the most to roll back through.
+
+AI makes that worse in a straightforward way: commits per day go up three or four times, and a ritual that was survivable at 8 commits a day is not survivable at 30.
 
 ## Why the bump is auto-detected, not asked
 
-If the AI asks "patch, minor, or major?" you will answer patch every time, because patch is the answer that ends the conversation. The version stops meaning anything within a month.
+If the AI asks "patch, minor, or major?" you will answer patch every time, because patch is the answer that ends the conversation. Ask enough times and you stop making save points at all.
 
 So `/ct` doesn't ask. It reads the commit subjects since the last tag and applies the rule:
 
@@ -110,7 +118,7 @@ Changes since <PREV_TAG>:
 EOF
 )"
 ```
-Annotated, never lightweight. A lightweight tag carries no author, no date, and no message, which makes it worthless six months later. Cap the list around 12 entries and add `... and N more commits`.
+Annotated, never lightweight. A lightweight tag is a bare name with no author, no date, and no message. On the bad day it hands you `v0.2.0 v0.2.1 v0.2.2` and tells you nothing about which one to go back to. The annotated tag carries its own contents, so the save point is readable without archaeology. Cap the list around 12 entries and add `... and N more commits`.
 
 ### 9. Back to the work branch
 ```bash
