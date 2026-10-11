@@ -3,7 +3,7 @@
 Free AI skills from [Agent Dev Thailand](https://facebook.com/agentdevthailand).
 
 [![Facebook](https://img.shields.io/badge/Facebook-Agent%20Dev%20Thailand-1877F2?style=flat&logo=facebook)](https://facebook.com/agentdevthailand)
-![Skills](https://img.shields.io/badge/Skills-23-blue)
+![Skills](https://img.shields.io/badge/Skills-24-blue)
 ![Platforms](https://img.shields.io/badge/Platforms-Claude_Code_%7C_Codex_%7C_Cursor-green)
 
 > ฝรั่งแจกพร้อมท์ฟรีกัน ทำไมคนไทยต้องซื้อพร้อมท์
@@ -218,6 +218,19 @@ Tagging is the step everyone agrees matters and nobody wants to do at 11pm, so v
 **Try:** `/ct` · `/ct minor` · `/ct rc` · `"commit and tag"`
 
 📄 [`skills/ct/SKILL.md`](skills/ct/SKILL.md)
+
+---
+
+### Wrap — Hand Off, Then Clear
+> "แชทเดียวเปิดค้างไว้ 18 วัน พิมพ์ห้าคำกลับไป โดนไปสิบเหรียญ"
+
+A long chat re-reads its whole context on every call, so a five-word reply typed into a huge session after a break costs the same as a long one. `/wrap` writes a ≤60-line brief — Next, State, Decisions, Open, Gotchas, Resume — to a file outside your repo, then tells you to `/clear`. A SessionStart hook loads that brief back into the fresh session automatically and marks it consumed so it never loads twice.
+
+**The skill is only half of it.** The hook is what makes clearing lossless, and `install.sh` only copies SKILL.md — the skill's own Install section has the three curl lines and the `settings.json` merge.
+
+**Try:** `/wrap` · `/wrap finish the migration` · `"handoff and clear"`
+
+📄 [`skills/wrap/SKILL.md`](skills/wrap/SKILL.md)
 
 ---
 

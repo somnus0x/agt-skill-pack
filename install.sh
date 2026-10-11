@@ -37,6 +37,7 @@ else
   install_skill "ai-memory"
   install_skill "agent-boundaries"
   install_skill "ct"
+  install_skill "wrap"
   install_skill "hold-up"
   install_skill "creator-content-ops"
   install_skill "link-triage"
